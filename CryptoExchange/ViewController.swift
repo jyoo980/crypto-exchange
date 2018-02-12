@@ -14,8 +14,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var cryptoPicker: UIPickerView!
     
     let request = "https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey=***REMOVED***"
-    let pickerValues = [["BCH", "BTC", "BTG", "ETC", "LTC", "XRP", "ZEC"],
-                           ["CAN", "USD", "GBP"]]
+    let pickerValues = [["BCH", "BTC", "BTG", "ETH", "LTC", "XRP"],
+                           ["CAD", "USD", "GBP"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,16 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         // Dispose of any resources that can be recreated.
     }
     
-    // Number of rows in our pickerView
+    @IBAction func updateButtonTapped(_ sender: UIButton) {
+        let cryptoChoiceIndex = cryptoPicker.selectedRow(inComponent: 0)
+        let currencyChoiceIndex = cryptoPicker.selectedRow(inComponent: 1)
+        let selectedCrypto = pickerValues[0][cryptoChoiceIndex]
+        let selectedReal = pickerValues[1][currencyChoiceIndex]
+        getConversionRate(crypto: selectedCrypto, realCurrency: selectedReal)
+    }   
+    
+    
+    // Number of rows in our pickerViw
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return pickerValues.count
     }
@@ -62,8 +71,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     fileprivate func setConverstionLabel(_ responseDict: NSDictionary??) {
         let crypto = responseDict??.value(forKey: "asset_id_base") as! String
         let realWorld = responseDict??.value(forKey: "asset_id_quote") as! String
-        let crypoCost = responseDict??.value(forKey: "rate")
-        self.conversionText.text = "1 " + "\(crypto)" + " = "
+        let cryptoCost = responseDict??.value(forKey: "rate") as! NSDecimalNumber
+        let costAsDouble = cryptoCost.doubleValue
+        let costAsString = String(round(100*costAsDouble)/100)
+        self.conversionText.text = "1 " + "\(crypto)" + " = " + "\(costAsString)" + " \(realWorld)"
     }
     
     func getConversionRate(crypto: String, realCurrency: String) {

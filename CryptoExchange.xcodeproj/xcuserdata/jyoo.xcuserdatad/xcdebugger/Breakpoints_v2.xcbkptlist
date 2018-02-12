@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/ViewController.swift"
-            timestampString = "540118575.890973"
+            timestampString = "540121818.2621551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "25"
@@ -26,12 +26,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/ViewController.swift"
-            timestampString = "540118575.891634"
+            timestampString = "540121818.263101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "getConversionRate(crypto:realCurrency:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CryptoExchange/ViewController.swift"
+            timestampString = "540121818.2638921"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "setConverstionLabel(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/ViewController.swift"
-            timestampString = "540118575.892203"
+            timestampString = "540121818.2646281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "setConverstionLabel(_:)"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "updateButtonTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
