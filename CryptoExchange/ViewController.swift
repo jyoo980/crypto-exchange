@@ -10,9 +10,11 @@ import UIKit
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
+    @IBOutlet weak var conversionText: UILabel!
     @IBOutlet weak var cryptoPicker: UIPickerView!
     
-    let crypoCurrencies = [["BCH", "BTC", "BTG", "ETC", "LTC", "XRP", "ZEC"],
+    let request = "https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey=***REMOVED***"
+    let pickerValues = [["BCH", "BTC", "BTG", "ETC", "LTC", "XRP", "ZEC"],
                            ["CAN", "USD", "GBP"]]
     
     override func viewDidLoad() {
@@ -20,6 +22,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         cryptoPicker.delegate = self
         cryptoPicker.dataSource = self
         // Do any additional setup after loading the view, typically from a nib.
+        getConversionRate(crypto: "BTC", realCurrency: "USD")
     }
     
     override func didReceiveMemoryWarning() {
@@ -29,17 +32,38 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     // Number of rows in our pickerView
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return crypoCurrencies.count
+        return pickerValues.count
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return crypoCurrencies[component].count
+        return pickerValues[component].count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent
         component: Int) -> String? {
-        return crypoCurrencies[component][row]
+        return pickerValues[component][row]
     }
     
+    fileprivate func printReponse(data: Data?) {
+        let responseString = String(data: data!, encoding: String.Encoding.utf8)
+        print("Conversion Rate Data:\n\(responseString!)")
+    }
+    
+    func getConversionRate(crypto: String, realCurrency: String) {
+        let session = URLSession.shared
+        var requestURL = self.request.replacingOccurrences(of: "{CRPTO}", with: crypto)
+        requestURL = requestURL.replacingOccurrences(of: "{REAL}", with: realCurrency)
+        let queryURL = URL(string: requestURL)
+        
+        let dataTask = session.dataTask(with: queryURL!) {
+            (data: Data?, response: URLResponse?, error: Error?) in
+            
+            if let data = data {
+                // Printing JSON Response to console
+                self.printReponse(data: data)
+            }
+            
+        }
+        dataTask.resume()
+    }
 }
-
