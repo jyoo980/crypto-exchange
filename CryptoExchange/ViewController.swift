@@ -47,7 +47,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return pickerValues[1][currencyChoiceIndex]
     }
     
-    // Number of rows in our pickerViw
+    // Number of rows in our pickerView
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return pickerValues.count
     }
