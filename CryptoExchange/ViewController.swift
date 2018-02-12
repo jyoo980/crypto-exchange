@@ -49,11 +49,19 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         print("Conversion Rate Data:\n\(responseString!)")
     }
     
+    fileprivate func getRequestURL(crypoCurrency: String, countryCurrency: String)-> URL? {
+        var requestURL = self.request.replacingOccurrences(of: "{CRPTO}", with: crypoCurrency)
+        requestURL = requestURL.replacingOccurrences(of: "{REAL}", with: countryCurrency)
+        return URL(string: requestURL)
+    }
+    
+    fileprivate func getJSONDict(data: Data?) -> NSDictionary?? {
+        return try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
+    }
+    
     func getConversionRate(crypto: String, realCurrency: String) {
         let session = URLSession.shared
-        var requestURL = self.request.replacingOccurrences(of: "{CRPTO}", with: crypto)
-        requestURL = requestURL.replacingOccurrences(of: "{REAL}", with: realCurrency)
-        let queryURL = URL(string: requestURL)
+        let queryURL = getRequestURL(crypoCurrency: crypto, countryCurrency: realCurrency)
         
         let dataTask = session.dataTask(with: queryURL!) {
             (data: Data?, response: URLResponse?, error: Error?) in
@@ -61,8 +69,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             if let data = data {
                 // Printing JSON Response to console
                 self.printReponse(data: data)
+                let responseDict = self.getJSONDict(data: data)
+                
             }
             
+          
         }
         dataTask.resume()
     }
