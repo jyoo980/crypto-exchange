@@ -59,6 +59,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
     }
     
+    fileprivate func setConverstionLabel(_ responseDict: NSDictionary??) {
+        let crypto = responseDict??.value(forKey: "asset_id_base") as! String
+        let realWorld = responseDict??.value(forKey: "asset_id_quote") as! String
+        let crypoCost = responseDict??.value(forKey: "rate")
+        self.conversionText.text = "1 " + "\(crypto)" + " = "
+    }
+    
     func getConversionRate(crypto: String, realCurrency: String) {
         let session = URLSession.shared
         let queryURL = getRequestURL(crypoCurrency: crypto, countryCurrency: realCurrency)
@@ -70,10 +77,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 // Printing JSON Response to console
                 self.printReponse(data: data)
                 let responseDict = self.getJSONDict(data: data)
-                
+                DispatchQueue.main.async {
+                    self.setConverstionLabel(responseDict)
+                }
             }
-            
-          
         }
         dataTask.resume()
     }

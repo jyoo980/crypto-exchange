@@ -47,8 +47,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="conversionText" destination="uDB-zK-tRt" id="pMA-g0-Ej3"/>
-                        <outlet property="cryptoPicker" destination="aIJ-wM-0TO" id="f8T-dw-ZbB"/>
+                        <outlet property="conversionText" destination="uDB-zK-tRt" id="qb1-UW-D7j"/>
+                        <outlet property="cryptoPicker" destination="aIJ-wM-0TO" id="U3H-ha-7Tc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
