@@ -32,12 +32,20 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     @IBAction func updateButtonTapped(_ sender: UIButton) {
-        let cryptoChoiceIndex = cryptoPicker.selectedRow(inComponent: 0)
-        let currencyChoiceIndex = cryptoPicker.selectedRow(inComponent: 1)
-        let selectedCrypto = pickerValues[0][cryptoChoiceIndex]
-        let selectedReal = pickerValues[1][currencyChoiceIndex]
+        let selectedCrypto = getSelectedCrypto()
+        let selectedReal = getSelectedReal()
         getConversionRate(crypto: selectedCrypto, realCurrency: selectedReal)
-    }   
+    }
+    
+    func getSelectedCrypto() -> String {
+        let cryptoChoiceIndex = cryptoPicker.selectedRow(inComponent: 0)
+        return pickerValues[0][cryptoChoiceIndex]
+    }
+    
+    func getSelectedReal() -> String {
+        let currencyChoiceIndex = cryptoPicker.selectedRow(inComponent: 1)
+        return pickerValues[1][currencyChoiceIndex]
+    }
     
     // Number of rows in our pickerViw
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
