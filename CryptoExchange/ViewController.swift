@@ -13,7 +13,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var conversionText: UILabel!
     @IBOutlet weak var cryptoPicker: UIPickerView!
     
-    let request = "https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey={APIKEY}"
+    let request = "https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey=***REMOVED***"
     let pickerValues = [["BCH", "BTC", "BTG", "ETH", "LTC", "XRP"],
                            ["CAD", "USD", "GBP"]]
     let callExceedMessage = "API Calls Exceeded"
