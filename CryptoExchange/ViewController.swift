@@ -16,6 +16,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     let request = "https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey=***REMOVED***"
     let pickerValues = [["BCH", "BTC", "BTG", "ETH", "LTC", "XRP"],
                            ["CAD", "USD", "GBP"]]
+    let callExceedMessage = "API Calls Exceeded"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let selectedReal = pickerValues[1][currencyChoiceIndex]
         getConversionRate(crypto: selectedCrypto, realCurrency: selectedReal)
     }   
-    
     
     // Number of rows in our pickerViw
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -68,13 +68,21 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
     }
     
+    fileprivate func setErrorLabel() {
+        DispatchQueue.main.async {
+            self.conversionText.text = self.callExceedMessage
+        }
+    }
+    
     fileprivate func setConverstionLabel(_ responseDict: NSDictionary??) {
-        let crypto = responseDict??.value(forKey: "asset_id_base") as! String
-        let realWorld = responseDict??.value(forKey: "asset_id_quote") as! String
-        let cryptoCost = responseDict??.value(forKey: "rate") as! NSDecimalNumber
-        let costAsDouble = cryptoCost.doubleValue
-        let costAsString = String(round(100*costAsDouble)/100)
-        self.conversionText.text = "1 " + "\(crypto)" + " = " + "\(costAsString)" + " \(realWorld)"
+        DispatchQueue.main.async {
+            let crypto = responseDict??.value(forKey: "asset_id_base") as! String
+            let realWorld = responseDict??.value(forKey: "asset_id_quote") as! String
+            let cryptoCost = responseDict??.value(forKey: "rate") as! NSDecimalNumber
+            let costAsDouble = cryptoCost.doubleValue
+            let costAsString = String(round(100*costAsDouble)/100)
+            self.conversionText.text = "1 " + "\(crypto)" + " = " + "\(costAsString)" + " \(realWorld)"
+        }
     }
     
     func getConversionRate(crypto: String, realCurrency: String) {
@@ -88,7 +96,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                 // Printing JSON Response to console
                 self.printReponse(data: data)
                 let responseDict = self.getJSONDict(data: data)
-                DispatchQueue.main.async {
+                if responseDict??["error"] != nil {
+                    self.setErrorLabel();
+                } else{
                     self.setConverstionLabel(responseDict)
                 }
             }
