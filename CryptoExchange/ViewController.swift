@@ -13,7 +13,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var conversionText: UILabel!
     @IBOutlet weak var cryptoPicker: UIPickerView!
     
-    let request = "https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey={APIKEY}"
+    let request = "https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey=***REMOVED***"
     let pickerValues = [["BCH", "BTC", "BTG", "ETH", "LTC", "XRP"],
                            ["CAD", "USD", "GBP"]]
     let callExceedMessage = "API Calls Exceeded"
@@ -24,7 +24,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         cryptoPicker.delegate = self
         cryptoPicker.dataSource = self
         // Do any additional setup after loading the view, typically from a nib.
-        self.displayDefault()
+        if self.conversionText.text != "Select Below" {
+            self.displayDefault()
+        }
     }
     
     override func didReceiveMemoryWarning() {
