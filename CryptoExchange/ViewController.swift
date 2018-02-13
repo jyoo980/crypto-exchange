@@ -17,13 +17,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     let pickerValues = [["BCH", "BTC", "BTG", "ETH", "LTC", "XRP"],
                            ["CAD", "USD", "GBP"]]
     let callExceedMessage = "API Calls Exceeded"
+    let defaultMessage = "Select Below"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         cryptoPicker.delegate = self
         cryptoPicker.dataSource = self
         // Do any additional setup after loading the view, typically from a nib.
-        getConversionRate(crypto: "BTC", realCurrency: "USD")
+        self.displayDefault()
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,6 +36,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let selectedCrypto = getSelectedCrypto()
         let selectedReal = getSelectedReal()
         getConversionRate(crypto: selectedCrypto, realCurrency: selectedReal)
+    }
+    
+    func displayDefault() {
+        self.conversionText.text = defaultMessage
     }
     
     func getSelectedCrypto() -> String {
