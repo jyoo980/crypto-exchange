@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/ViewController.swift"
-            timestampString = "540180626.130183"
+            timestampString = "540335346.915405"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
@@ -26,13 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/ViewController.swift"
-            timestampString = "540180626.131376"
+            timestampString = "540335346.961697"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "105"
             endingLineNumber = "105"
-            landmarkName = "ViewController"
-            landmarkType = "3">
+            landmarkName = "getConversionRate(crypto:realCurrency:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/ViewController.swift"
-            timestampString = "540180626.131785"
+            timestampString = "540335346.962055"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "39"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/ViewController.swift"
-            timestampString = "540180626.132091"
+            timestampString = "540335346.962376"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "108"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/ViewController.swift"
-            timestampString = "540180626.132398"
+            timestampString = "540335346.962682"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "107"
@@ -122,12 +122,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/ViewController.swift"
-            timestampString = "540180626.132691"
+            timestampString = "540335346.9629771"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "110"
             endingLineNumber = "110"
             landmarkName = "getConversionRate(crypto:realCurrency:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CryptoExchange/ViewController.swift"
+            timestampString = "540335346.963277"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "getRequestURL(crypoCurrency:countryCurrency:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

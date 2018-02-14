@@ -13,6 +13,8 @@
 		35897D8920316C14005C1F88 /* CryptoExchange.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 35897D8720316C14005C1F88 /* CryptoExchange.xcdatamodeld */; };
 		35897D8B20316C14005C1F88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35897D8A20316C14005C1F88 /* Assets.xcassets */; };
 		35897D8E20316C14005C1F88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35897D8C20316C14005C1F88 /* LaunchScreen.storyboard */; };
+		35C02F432033EB4000C668DC /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35C02F422033EB4000C668DC /* keys.plist */; };
+		35C02F452033EB6900C668DC /* PropertyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C02F442033EB6900C668DC /* PropertyManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		35897D8A20316C14005C1F88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35897D8D20316C14005C1F88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		35897D8F20316C14005C1F88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		35C02F422033EB4000C668DC /* keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
+		35C02F442033EB6900C668DC /* PropertyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				35897D8C20316C14005C1F88 /* LaunchScreen.storyboard */,
 				35897D8F20316C14005C1F88 /* Info.plist */,
 				35897D8720316C14005C1F88 /* CryptoExchange.xcdatamodeld */,
+				35C02F422033EB4000C668DC /* keys.plist */,
+				35C02F442033EB6900C668DC /* PropertyManager.swift */,
 			);
 			path = CryptoExchange;
 			sourceTree = "<group>";
@@ -126,6 +132,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35C02F432033EB4000C668DC /* keys.plist in Resources */,
 				35897D8E20316C14005C1F88 /* LaunchScreen.storyboard in Resources */,
 				35897D8B20316C14005C1F88 /* Assets.xcassets in Resources */,
 				35897D8620316C14005C1F88 /* Main.storyboard in Resources */,
@@ -139,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35C02F452033EB6900C668DC /* PropertyManager.swift in Sources */,
 				35897D8920316C14005C1F88 /* CryptoExchange.xcdatamodeld in Sources */,
 				35897D8320316C14005C1F88 /* ViewController.swift in Sources */,
 				35897D8120316C14005C1F88 /* AppDelegate.swift in Sources */,
