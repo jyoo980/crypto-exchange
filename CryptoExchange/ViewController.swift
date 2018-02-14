@@ -19,7 +19,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     let callExceedMessage = "API Calls Exceeded"
     let defaultMessage = "Select Below"
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         cryptoPicker.delegate = self
