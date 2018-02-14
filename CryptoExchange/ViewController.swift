@@ -74,7 +74,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     fileprivate func getRequestURL(crypoCurrency: String, countryCurrency: String)-> URL? {
-        let apiKey = getAPIKey(key: "***REMOVED***") 
+        let apiKey = getAPIKey(key: "coinAPIKey")
         var requestURL = self.request.replacingOccurrences(of: "{CRPTO}", with: crypoCurrency)
         requestURL = requestURL.replacingOccurrences(of: "{REAL}", with: countryCurrency)
         requestURL = requestURL.replacingOccurrences(of: "{APIKEY}", with: apiKey)
