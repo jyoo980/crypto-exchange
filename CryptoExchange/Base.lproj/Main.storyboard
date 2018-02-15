@@ -54,7 +54,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="chtChart" destination="8Qy-HC-4QJ" id="VQl-f2-nYY"/>
+                        <outlet property="chartView" destination="8Qy-HC-4QJ" id="VQl-f2-nYY"/>
                         <outlet property="conversionText" destination="uDB-zK-tRt" id="HoL-DW-UJP"/>
                         <outlet property="cryptoPicker" destination="aIJ-wM-0TO" id="1it-xN-zbl"/>
                     </connections>

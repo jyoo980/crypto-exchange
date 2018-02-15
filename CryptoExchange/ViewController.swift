@@ -13,7 +13,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet weak var conversionText: UILabel!
     @IBOutlet weak var cryptoPicker: UIPickerView!
-    @IBOutlet weak var chtChart: LineChartView!
+    @IBOutlet weak var chartView: LineChartView!
     
     let request = "https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey={APIKEY}"
     let graphRequest = "https://coinbin.org/{CRYPTO}/history"
@@ -27,6 +27,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         cryptoPicker.delegate = self
         cryptoPicker.dataSource = self
         // Do any additional setup after loading the view, typically from a nib.
+        self.initChart()
         if self.conversionText.text != "Select Below" {
             self.displayDefault()
         }
@@ -113,7 +114,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     fileprivate func updateGraph(coinData: NSArray) {
         DispatchQueue.main.async {
-            let year = 365
+            var year = 0;
+            if (coinData.count < 365) {
+                year = coinData.count - 1
+            } else {
+                year = 365
+            }
             var lineChartDatum = [ChartDataEntry]()
             
             for d in 0...year {
@@ -125,13 +131,30 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             
             let line1 = LineChartDataSet(values: lineChartDatum, label: "")
             line1.colors = [NSUIColor.black]
+            line1.drawCirclesEnabled = false
+            line1.drawValuesEnabled = false
+            line1.colors = [NSUIColor.orange]
+            line1.lineWidth = 2.0
             let data = LineChartData()
             
             data.addDataSet(line1)
-            self.chtChart.
-            self.chtChart.data = data
-            
+            self.chartView.data = data
         }
+    }
+    
+    fileprivate func initChart() {
+        self.chartView.noDataText = ""
+        self.chartView.chartDescription?.text = ""
+        self.chartView.xAxis.drawLabelsEnabled = false
+        self.chartView.xAxis.drawGridLinesEnabled = false
+        self.chartView.xAxis.drawAxisLineEnabled = false
+        self.chartView.leftAxis.drawAxisLineEnabled = false
+        self.chartView.leftAxis.drawLabelsEnabled = false
+        self.chartView.leftAxis.drawGridLinesEnabled = false
+        self.chartView.rightAxis.drawAxisLineEnabled = false
+        self.chartView.rightAxis.drawLabelsEnabled = false
+        self.chartView.rightAxis.drawGridLinesEnabled = false
+        self.chartView.legend.enabled = false
     }
     
     func getExchangeRateGraph(crypto: String) {
@@ -143,7 +166,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             
             if let data = data {
                 // Printing JSON Response to console
-                self.printReponse(data: data)
                 let responseDict = self.getJSONDict(data: data)
                 let historyArray = responseDict??["history"] as! NSArray
                 self.updateGraph(coinData: historyArray)
