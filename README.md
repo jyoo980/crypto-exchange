@@ -19,3 +19,6 @@ An easy way to check the most up-to-date exchange rates between popular cryptocu
 * Request URL: https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey={KEY}
 * Limited to 100 requests/day - will probably look for an API with unlimited free calls
 * Looking to add more support for other crytocurrencies 
+
+## Todos
+* Refactor into MVC architecture
