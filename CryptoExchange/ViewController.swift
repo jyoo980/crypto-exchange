@@ -15,7 +15,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     let request = "https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey={APIKEY}"
     let pickerValues = [["BCH", "BTC", "BTG", "ETH", "LTC", "XRP"],
-                           ["CAD", "USD", "GBP", "EUR"]]
+                           ["CAD", "USD", "GBP", "EUR", "JPY"]]
     let callExceedMessage = "API Calls Exceeded"
     let defaultMessage = "Select Below"
     
