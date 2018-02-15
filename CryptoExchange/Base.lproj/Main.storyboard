@@ -44,8 +44,8 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Qy-HC-4QJ">
-                                <rect key="frame" x="16" y="130" width="343" height="378"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Qy-HC-4QJ" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="16" y="131" width="343" height="378"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -54,6 +54,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="chtChart" destination="8Qy-HC-4QJ" id="VQl-f2-nYY"/>
                         <outlet property="conversionText" destination="uDB-zK-tRt" id="HoL-DW-UJP"/>
                         <outlet property="cryptoPicker" destination="aIJ-wM-0TO" id="1it-xN-zbl"/>
                     </connections>

@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import Charts
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var conversionText: UILabel!
     @IBOutlet weak var cryptoPicker: UIPickerView!
+    @IBOutlet weak var chtChart: LineChartView!
     
     let request = "https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey={APIKEY}"
+    let graphRequest = "https://coinbin.org/{CRYPTO}/history"
     let pickerValues = [["BCH", "BTC", "BTG", "ETH", "LTC", "XRP"],
                            ["CAD", "USD", "GBP", "EUR", "JPY"]]
     let callExceedMessage = "API Calls Exceeded"
@@ -38,6 +41,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let selectedCrypto = getSelectedCrypto()
         let selectedReal = getSelectedReal()
         getConversionRate(crypto: selectedCrypto, realCurrency: selectedReal)
+        getExchangeRateGraph(crypto: selectedCrypto)
     }
     
     func displayDefault() {
@@ -81,6 +85,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return URL(string: requestURL)
     }
     
+    fileprivate func getGraphRequestURL(coin: String) -> URL? {
+        let requestURL = self.graphRequest.replacingOccurrences(of: "{CRYPTO}", with: coin)
+        return URL(string: requestURL)
+    }
+    
     fileprivate func getJSONDict(data: Data?) -> NSDictionary?? {
         return try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
     }
@@ -101,6 +110,48 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             self.conversionText.text = "1 " + "\(crypto)" + " = " + "\(costAsString)" + " \(realWorld)"
         }
     }
+    
+    fileprivate func updateGraph(coinData: NSArray) {
+        DispatchQueue.main.async {
+            let year = 365
+            var lineChartDatum = [ChartDataEntry]()
+            
+            for d in 0...year {
+                let coinEntry = coinData[year - d] as? NSDictionary
+                let yVal = coinEntry?.value(forKey: "value")
+                let value = ChartDataEntry(x: Double(d), y: yVal as! Double)
+                lineChartDatum.append(value)
+            }
+            
+            let line1 = LineChartDataSet(values: lineChartDatum, label: "")
+            line1.colors = [NSUIColor.black]
+            let data = LineChartData()
+            
+            data.addDataSet(line1)
+            self.chtChart.
+            self.chtChart.data = data
+            
+        }
+    }
+    
+    func getExchangeRateGraph(crypto: String) {
+        let session = URLSession.shared;
+        let queryURL = getGraphRequestURL(coin: crypto)
+        
+        let dataTask = session.dataTask(with: queryURL!) {
+            (data: Data?, response: URLResponse?, error: Error?) in
+            
+            if let data = data {
+                // Printing JSON Response to console
+                self.printReponse(data: data)
+                let responseDict = self.getJSONDict(data: data)
+                let historyArray = responseDict??["history"] as! NSArray
+                self.updateGraph(coinData: historyArray)
+            }
+        }
+        dataTask.resume()
+    }
+
     
     func getConversionRate(crypto: String, realCurrency: String) {
         let session = URLSession.shared
@@ -123,3 +174,4 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         dataTask.resume()
     }
 }
+
