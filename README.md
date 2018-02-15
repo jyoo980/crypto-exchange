@@ -1,11 +1,16 @@
 # crypto-exchange
 
-An easy way to check the most up-to-date exchange rates between popular cryptocurrencies and real-world currency. Built using the CoinBase API. Below are some screenshots of the app in action.
+An easy way to check the most up-to-date exchange rates between popular cryptocurrencies and real-world currency. Built using the CoinBase API. crypo-exchange also shows historical exchange rate data for cryptocurrencies, going back up to a year. Below are some screenshots of the app in action.
 
 <p align="center">
-<img src="https://github.com/jyoo980/crypto-exchange/blob/master/CryptoExchange/Assets.xcassets/v1.0-p1.imageset/v1.0-p1.png" width="327" height="561" style="float: left; width: 30%; margin-right: 1%; margin-bottom: 0.5em;">
-<img src="https://github.com/jyoo980/crypto-exchange/blob/master/CryptoExchange/Assets.xcassets/v1.0-p2.imageset/v1.0-p2.png" width="327" height="561" style="float: left; width: 30%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="https://github.com/jyoo980/crypto-exchange/blob/master/CryptoExchange/Assets.xcassets/v1.1-p1.imageset/v1.1-p1.png" width="327" height="561" style="float: left; width: 30%; margin-right: 1%; margin-bottom: 0.5em;">
+<img src="https://github.com/jyoo980/crypto-exchange/blob/master/CryptoExchange/Assets.xcassets/v1.1-p2.imageset/v1.1-p2.png" width="327" height="561" style="float: left; width: 30%; margin-right: 1%; margin-bottom: 0.5em;">
 </p>
+
+## Techonologies
+* CoinAPI (for most up-to-date exchange rates)
+* CoinbinAPI (for historical exchange rates)
+* Charts for iOS
 
 ## Current facts
 * Request URL: https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey={KEY}
