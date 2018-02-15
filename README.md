@@ -22,3 +22,4 @@ An easy way to check the most up-to-date exchange rates between popular cryptocu
 
 ## Todos
 * Refactor into MVC architecture
+* Introduce caching for API calls (workaround for 100 requests/24hr limit)
