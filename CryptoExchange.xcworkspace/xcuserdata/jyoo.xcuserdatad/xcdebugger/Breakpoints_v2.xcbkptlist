@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/CoinExchangeRequest.swift"
-            timestampString = "540446608.810493"
+            timestampString = "540467505.464715"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "getConversionRate(crypto:country:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,23 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/CoinExchangeRequest.swift"
-            timestampString = "540446608.810937"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "generateRequestURL(crypto:country:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CryptoExchange/Model/CoinExchangeRequest.swift"
-            timestampString = "540446608.811253"
+            timestampString = "540467505.465402"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "24"
@@ -106,11 +90,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/CoinExchangeRequest.swift"
-            timestampString = "540446608.811607"
+            timestampString = "540467505.465718"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "generateRequestURL(crypto:country:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CryptoExchange/Model/CoinExchangeRequest.swift"
+            timestampString = "540467505.466006"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
             landmarkName = "generateRequestURL(crypto:country:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,13 +122,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Controller/ViewController.swift"
-            timestampString = "540446608.811905"
+            timestampString = "540467596.086468"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
-            landmarkName = "updateConversionRate(crypto:realCurrency:)"
-            landmarkType = "7">
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "ViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/CoinExchangeRequest.swift"
-            timestampString = "540446608.811975"
+            timestampString = "540467505.466828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "getConversionRate(crypto:country:completionHandler:)"
             landmarkType = "7">
             <Locations>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/CoinExchangeRequest.swift"
-            timestampString = "540446608.812283"
+            timestampString = "540467505.467133"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "getConversionRate(crypto:country:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -198,16 +198,144 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/CoinExchangeRequest.swift"
-            timestampString = "540447268.466809"
+            timestampString = "540467505.467419"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
             landmarkName = "parseConversionRate(responseDict:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CryptoExchange.CoinExchangeRequest.(parseConversionRate in _A8CEC4B880E07ED889C8ADC98D3B9FE3)(responseDict: Swift.Optional&lt;Swift.Optional&lt;__ObjC.NSDictionary&gt;&gt;) -&gt; Swift.String"
+                  moduleName = "CryptoExchange"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jyoo/Desktop/crypto-exchange/CryptoExchange/Model/CoinExchangeRequest.swift"
+                  timestampString = "540463078.405853"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "19">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CryptoExchange.CoinExchangeRequest.(parseConversionRate in _A8CEC4B880E07ED889C8ADC98D3B9FE3)(responseDict: Swift.Optional&lt;Swift.Optional&lt;__ObjC.NSDictionary&gt;&gt;) -&gt; Swift.String"
+                  moduleName = "CryptoExchange"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jyoo/Desktop/crypto-exchange/CryptoExchange/Model/CoinExchangeRequest.swift"
+                  timestampString = "540463078.4088171"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "3886">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CryptoExchange/Model/CoinGraphRequest.swift"
+            timestampString = "540467596.086826"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "constructDataSet(history:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CryptoExchange/Model/CoinGraphRequest.swift"
+            timestampString = "540467596.087353"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "constructDataSet(history:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CryptoExchange/Model/CoinGraphRequest.swift"
+            timestampString = "540467596.087624"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "constructDataPoints(crypto:chart:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CryptoExchange.CoinGraphRequest.(constructDataPoints in _5D8E7764A41157C09B7BD3E3AF513613)(crypto: Swift.String, chart: Swift.ImplicitlyUnwrappedOptional&lt;Charts.LineChartView&gt;) -&gt; ()"
+                  moduleName = "CryptoExchange"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jyoo/Desktop/crypto-exchange/CryptoExchange/Model/CoinGraphRequest.swift"
+                  timestampString = "540467093.059747"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "141">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__ObjC.NSArray) -&gt; () in CryptoExchange.CoinGraphRequest.(constructDataPoints in _5D8E7764A41157C09B7BD3E3AF513613)(crypto: Swift.String, chart: Swift.ImplicitlyUnwrappedOptional&lt;Charts.LineChartView&gt;) -&gt; ()"
+                  moduleName = "CryptoExchange"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jyoo/Desktop/crypto-exchange/CryptoExchange/Model/CoinGraphRequest.swift"
+                  timestampString = "540467093.0614361"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "369">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CryptoExchange/Model/CoinGraphRequest.swift"
+            timestampString = "540467596.0878789"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "constructDataSet(history:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

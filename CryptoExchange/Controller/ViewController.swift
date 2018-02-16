@@ -24,7 +24,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         super.viewDidLoad()
         cryptoPicker.delegate = self
         cryptoPicker.dataSource = self
-        // Do any additional setup after loading the view, typically from a nib.
         self.initChart()
         if self.conversionText.text != "Select Below" {
             self.displayDefault()
@@ -33,14 +32,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func updateButtonTapped(_ sender: UIButton) {
         let selectedCrypto = getSelectedCrypto()
         let selectedReal = getSelectedReal()
         updateConversionRate(crypto: selectedCrypto, realCurrency: selectedReal)
-//        getExchangeRateGraph(crypto: selectedCrypto)
+        getExchangeRateGraph(coin: selectedCrypto)
     }
     
     func displayDefault() {
@@ -76,34 +74,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         print("Conversion Rate Data:\n\(responseString!)")
     }
     
-    fileprivate func updateGraph(coinData: NSArray) {
-        DispatchQueue.main.async {
-            var year = 0;
-            if (coinData.count < 365) {
-                year = coinData.count - 1
-            } else {
-                year = 365
-            }
-            var lineChartDatum = [ChartDataEntry]()
-            
-            for d in 0...year {
-                let coinEntry = coinData[year - d] as? NSDictionary
-                let yVal = coinEntry?.value(forKey: "value")
-                let value = ChartDataEntry(x: Double(d), y: yVal as! Double)
-                lineChartDatum.append(value)
-            }
-            
-            let line1 = LineChartDataSet(values: lineChartDatum, label: "")
-            line1.colors = [NSUIColor.black]
-            line1.drawCirclesEnabled = false
-            line1.drawValuesEnabled = false
-            line1.colors = [NSUIColor.orange]
-            line1.lineWidth = 2.0
-            let data = LineChartData()
-            
-            data.addDataSet(line1)
-            self.chartView.data = data
-        }
+    fileprivate func getExchangeRateGraph(coin: String) {
+        let coinGraphRequest = CoinGraphRequest()
+        coinGraphRequest.getUpdatedChartData(crypto: coin, chartView: self.chartView)
     }
     
     fileprivate func initChart() {
@@ -121,23 +94,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         self.chartView.legend.enabled = false
     }
     
-    //    func getExchangeRateGraph(crypto: String) {
-    //        let session = URLSession.shared;
-    //        let queryURL = getGraphRequestURL(coin: crypto)
-    //
-    //        let dataTask = session.dataTask(with: queryURL!) {
-    //            (data: Data?, response: URLResponse?, error: Error?) in
-    //
-    //            if let data = data {
-    //                // Printing JSON Response to console
-    //                let responseDict = self.getJSONDict(data: data)
-    //                let historyArray = responseDict??["history"] as! NSArray
-    //                self.updateGraph(coinData: historyArray)
-    //            }
-    //        }
-    //        dataTask.resume()
-    //    }
-    
     func setExchangeRateLabel(rate: String) {
         DispatchQueue.main.async {
             self.conversionText.text = rate
@@ -152,7 +108,3 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
 }
-
-
-
-

@@ -12,7 +12,12 @@ import Charts
 class CoinGraphRequest {
     
     private var graphRequest = "https://coinbin.org/{CRYPTO}/history"
-    
+    var chartData = LineChartData()
+            
+    func getUpdatedChartData(crypto: String, chartView: LineChartView!) {
+        self.constructDataPoints(crypto: crypto, chart: chartView)
+    }
+            
     fileprivate func generateRequestURL(cryptoCurrency: String) -> URL? {
         let requestURL = self.graphRequest.replacingOccurrences(of: "{CRYPTO}", with: cryptoCurrency)
         return URL(string: requestURL)
@@ -25,9 +30,10 @@ class CoinGraphRequest {
         let dataTask = session.dataTask(with: queryURL!) { (data, response, error) in
             
             if let data = data {
-                
-                let responseDict = self.parseToDict(responseData: data)
-                completionHandler(responseDict??["history"] as! NSArray)
+                DispatchQueue.main.async {
+                    let responseDict = self.parseToDict(responseData: data)
+                    completionHandler(responseDict??["history"] as! NSArray)
+                }
             }
         }
         dataTask.resume()
@@ -37,32 +43,38 @@ class CoinGraphRequest {
         return try? JSONSerialization.jsonObject(with: responseData!, options: .allowFragments) as! NSDictionary
     }
     
-    fileprivate func retrieveGraphData(crypto: String) -> LineChartData {
-        getHistory(crypto: crypto) { result -> () in
-             var dataLine = self.constructDataPoints(history: result)
-        
-            return nil  //todo
+    fileprivate func constructDataPoints(crypto: String, chart: LineChartView!) {
+        getHistory(crypto: crypto) { (result) -> () in
+            let dataSet = self.constructDataSet(history: result)
+            let data = LineChartData()
+            DispatchQueue.main.async {
+                data.addDataSet(dataSet)
+                chart.data = data
+            }
         }
-        
     }
     
-    fileprivate func constructDataPoints(history: NSArray) -> LineChartData {
-        var year = setMaxIter(array: history)
+    fileprivate func constructDataSet(history: NSArray) -> LineChartDataSet {
+        let year = setMaxIter(array: history)
         var lineChartData = [ChartDataEntry]()
         
         for d in 0...year {
             lineChartData.append(addDataPoint(history: history, day: d, year: 365))
         }
         
-        let line1 = LineChartDataSet(values: lineChartData, label: "")
-        line1.colors = [NSUIColor.black]
-        line1.drawCirclesEnabled = false
-        line1.drawValuesEnabled = false
-        line1.colors = [NSUIColor.orange]
-        line1.lineWidth = 2.0
-        let data = LineChartData()
+        let dataSet = generateLineChartDataSet(line: lineChartData, label: "")
+        return dataSet
+    }
+    
+    fileprivate func generateLineChartDataSet(line: [ChartDataEntry], label: String) -> LineChartDataSet {
+        let line = LineChartDataSet(values: line, label: label)
+        line.colors = [NSUIColor.black]
+        line.drawCirclesEnabled = false
+        line.drawValuesEnabled = false
+        line.colors = [NSUIColor.orange]
+        line.lineWidth = 2.0
         
-        return data
+        return line
     }
     
     fileprivate func addDataPoint(history: NSArray, day: Int, year: Int) -> ChartDataEntry {
@@ -78,7 +90,6 @@ class CoinGraphRequest {
             return 365
         }
     }
-    
     
 
 }
