@@ -15,8 +15,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var cryptoPicker: UIPickerView!
     @IBOutlet weak var chartView: LineChartView!
     
-    let request = "https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey={APIKEY}"
-    let graphRequest = "https://coinbin.org/{CRYPTO}/history"
     let pickerValues = [["BCH", "BTC", "BTG", "ETH", "LTC", "XRP"],
                            ["CAD", "USD", "GBP", "EUR", "JPY"]]
     let callExceedMessage = "API Calls Exceeded"
@@ -41,8 +39,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBAction func updateButtonTapped(_ sender: UIButton) {
         let selectedCrypto = getSelectedCrypto()
         let selectedReal = getSelectedReal()
-        getConversionRate(crypto: selectedCrypto, realCurrency: selectedReal)
-        getExchangeRateGraph(crypto: selectedCrypto)
+        updateConversionRate(crypto: selectedCrypto, realCurrency: selectedReal)
+//        getExchangeRateGraph(crypto: selectedCrypto)
     }
     
     func displayDefault() {
@@ -76,40 +74,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     fileprivate func printReponse(data: Data?) {
         let responseString = String(data: data!, encoding: String.Encoding.utf8)
         print("Conversion Rate Data:\n\(responseString!)")
-    }
-    
-    fileprivate func getRequestURL(crypoCurrency: String, countryCurrency: String)-> URL? {
-        let apiKey = getAPIKey(key: "coinAPIKey")
-        var requestURL = self.request.replacingOccurrences(of: "{CRPTO}", with: crypoCurrency)
-        requestURL = requestURL.replacingOccurrences(of: "{REAL}", with: countryCurrency)
-        requestURL = requestURL.replacingOccurrences(of: "{APIKEY}", with: apiKey)
-        return URL(string: requestURL)
-    }
-    
-    fileprivate func getGraphRequestURL(coin: String) -> URL? {
-        let requestURL = self.graphRequest.replacingOccurrences(of: "{CRYPTO}", with: coin)
-        return URL(string: requestURL)
-    }
-    
-    fileprivate func getJSONDict(data: Data?) -> NSDictionary?? {
-        return try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
-    }
-    
-    fileprivate func setErrorLabel() {
-        DispatchQueue.main.async {
-            self.conversionText.text = self.callExceedMessage
-        }
-    }
-    
-    fileprivate func setConverstionLabel(_ responseDict: NSDictionary??) {
-        DispatchQueue.main.async {
-            let crypto = responseDict??.value(forKey: "asset_id_base") as! String
-            let realWorld = responseDict??.value(forKey: "asset_id_quote") as! String
-            let cryptoCost = responseDict??.value(forKey: "rate") as! NSDecimalNumber
-            let costAsDouble = cryptoCost.doubleValue
-            let costAsString = String(round(100*costAsDouble)/100)
-            self.conversionText.text = "1 " + "\(crypto)" + " = " + "\(costAsString)" + " \(realWorld)"
-        }
     }
     
     fileprivate func updateGraph(coinData: NSArray) {
@@ -157,43 +121,38 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         self.chartView.legend.enabled = false
     }
     
-    func getExchangeRateGraph(crypto: String) {
-        let session = URLSession.shared;
-        let queryURL = getGraphRequestURL(coin: crypto)
-        
-        let dataTask = session.dataTask(with: queryURL!) {
-            (data: Data?, response: URLResponse?, error: Error?) in
-            
-            if let data = data {
-                // Printing JSON Response to console
-                let responseDict = self.getJSONDict(data: data)
-                let historyArray = responseDict??["history"] as! NSArray
-                self.updateGraph(coinData: historyArray)
-            }
-        }
-        dataTask.resume()
-    }
-
+    //    func getExchangeRateGraph(crypto: String) {
+    //        let session = URLSession.shared;
+    //        let queryURL = getGraphRequestURL(coin: crypto)
+    //
+    //        let dataTask = session.dataTask(with: queryURL!) {
+    //            (data: Data?, response: URLResponse?, error: Error?) in
+    //
+    //            if let data = data {
+    //                // Printing JSON Response to console
+    //                let responseDict = self.getJSONDict(data: data)
+    //                let historyArray = responseDict??["history"] as! NSArray
+    //                self.updateGraph(coinData: historyArray)
+    //            }
+    //        }
+    //        dataTask.resume()
+    //    }
     
-    func getConversionRate(crypto: String, realCurrency: String) {
-        let session = URLSession.shared
-        let queryURL = getRequestURL(crypoCurrency: crypto, countryCurrency: realCurrency)
-        
-        let dataTask = session.dataTask(with: queryURL!) {
-            (data: Data?, response: URLResponse?, error: Error?) in
-            
-            if let data = data {
-                // Printing JSON Response to console
-                self.printReponse(data: data)
-                let responseDict = self.getJSONDict(data: data)
-                if responseDict??["error"] != nil {
-                    self.setErrorLabel();
-                } else{
-                    self.setConverstionLabel(responseDict)
-                }
-            }
+    func setExchangeRateLabel(rate: String) {
+        DispatchQueue.main.async {
+            self.conversionText.text = rate
         }
-        dataTask.resume()
     }
+    
+    func updateConversionRate(crypto: String, realCurrency: String) {
+        let coinExchangeRequest = CoinExchangeRequest()
+        coinExchangeRequest.getConversionRate(crypto: crypto, country: realCurrency) { (result) -> () in
+            self.setExchangeRateLabel(rate: result)
+        }
+    }
+    
 }
+
+
+
 
