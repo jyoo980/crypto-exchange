@@ -17,13 +17,22 @@ class CoinGraphRequest {
     func getUpdatedChartData(crypto: String, chartView: LineChartView!) {
         self.constructDataPoints(crypto: crypto, chart: chartView)
     }
-            
+    
     fileprivate func generateRequestURL(cryptoCurrency: String) -> URL? {
         let requestURL = self.graphRequest.replacingOccurrences(of: "{CRYPTO}", with: cryptoCurrency)
         return URL(string: requestURL)
     }
     
-    func getHistory(crypto: String, completionHandler: @escaping (_ result:NSArray) ->()) {
+    fileprivate func constructDataPoints(crypto: String, chart: LineChartView!) {
+        getHistory(crypto: crypto) { (result) -> () in
+            let dataSet = self.constructDataSet(history: result)
+            let data = LineChartData()
+                data.addDataSet(dataSet)
+                chart.data = data
+        }
+    }
+    
+    fileprivate func getHistory(crypto: String, completionHandler: @escaping (_ result:NSArray) ->()) {
         let session = URLSession.shared
         let queryURL = generateRequestURL(cryptoCurrency: crypto)
         
@@ -39,17 +48,6 @@ class CoinGraphRequest {
         dataTask.resume()
     }
     
-    fileprivate func constructDataPoints(crypto: String, chart: LineChartView!) {
-        getHistory(crypto: crypto) { (result) -> () in
-            let dataSet = self.constructDataSet(history: result)
-            let data = LineChartData()
-//            DispatchQueue.main.async {
-                data.addDataSet(dataSet)
-                chart.data = data
-//            }
-        }
-    }
-    
     fileprivate func constructDataSet(history: NSArray) -> LineChartDataSet {
         let year = setMaxIter(array: history)
         var lineChartData = [ChartDataEntry]()
@@ -62,6 +60,20 @@ class CoinGraphRequest {
         return dataSet
     }
     
+    fileprivate func setMaxIter(array: NSArray) -> Int {
+        if (array.count < 365) {
+            return array.count - 1
+        } else {
+            return 365
+        }
+    }
+    
+    fileprivate func addDataPoint(history: NSArray, day: Int, year: Int) -> ChartDataEntry {
+        let coinEntry = history[year - day] as? NSDictionary
+        let yVal = coinEntry?.value(forKey: "value")
+        return ChartDataEntry(x: Double(day), y: yVal as! Double)
+    }
+    
     fileprivate func generateLineChartDataSet(line: [ChartDataEntry], label: String) -> LineChartDataSet {
         let line = LineChartDataSet(values: line, label: label)
         line.colors = [NSUIColor.black]
@@ -72,20 +84,5 @@ class CoinGraphRequest {
         
         return line
     }
-    
-    fileprivate func addDataPoint(history: NSArray, day: Int, year: Int) -> ChartDataEntry {
-        let coinEntry = history[year - day] as? NSDictionary
-        let yVal = coinEntry?.value(forKey: "value")
-        return ChartDataEntry(x: Double(day), y: yVal as! Double)
-    }
-    
-    fileprivate func setMaxIter(array: NSArray) -> Int {
-        if (array.count < 365) {
-            return array.count - 1
-        } else {
-            return 365
-        }
-    }
-    
 
 }
