@@ -10,14 +10,24 @@ import Foundation
 
 class ExchangeRateCache {
     
-    private var cache = [String : [String:Double]]()
+    static let shared = ExchangeRateCache()
     
-    func invalidateCahche() {
+    private var cache : [String:[String:Double]]
+    
+    private init() {
+        self.cache = [String:[String:Double]]()
+    }
+    
+    func invalidate() {
         self.cache.removeAll()
     }
     
-    func getEntry(crypto: String, real: String) -> Double {
+    func fetch(crypto: String, real: String) -> Double {
         return self.cache[crypto]![real]!
+    }
+    
+    func set(crypto: String, real: String, conversionRate: Double) {
+        self.cache[crypto]![real] = conversionRate
     }
     
 }
