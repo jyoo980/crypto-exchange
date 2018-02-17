@@ -12,8 +12,8 @@ import Charts
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var conversionText: UILabel!
-    @IBOutlet weak var cryptoPicker: UIPickerView!
     @IBOutlet weak var chartView: LineChartView!
+    @IBOutlet weak var cryptoPicker: UIPickerView!
     
     let pickerValues = [["BCH", "BTC", "BTG", "ETH", "LTC", "XRP"],
                            ["CAD", "USD", "GBP", "EUR", "JPY"]]

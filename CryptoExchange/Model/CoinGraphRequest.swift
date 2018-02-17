@@ -43,10 +43,10 @@ class CoinGraphRequest {
         getHistory(crypto: crypto) { (result) -> () in
             let dataSet = self.constructDataSet(history: result)
             let data = LineChartData()
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
                 data.addDataSet(dataSet)
                 chart.data = data
-            }
+//            }
         }
     }
     
@@ -55,7 +55,7 @@ class CoinGraphRequest {
         var lineChartData = [ChartDataEntry]()
         
         for d in 0...year {
-            lineChartData.append(addDataPoint(history: history, day: d, year: 365))
+            lineChartData.append(addDataPoint(history: history, day: d, year: year))
         }
         
         let dataSet = generateLineChartDataSet(line: lineChartData, label: "")

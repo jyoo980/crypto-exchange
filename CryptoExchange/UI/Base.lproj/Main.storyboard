@@ -35,28 +35,28 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="updateButtonTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="REd-rb-63S"/>
+                                    <action selector="updateButtonTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="eC2-8C-PmA"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDB-zK-tRt">
-                                <rect key="frame" x="0.0" y="15" width="375" height="168"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Qy-HC-4QJ" customClass="LineChartView" customModule="Charts">
                                 <rect key="frame" x="16" y="131" width="343" height="378"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDB-zK-tRt">
+                                <rect key="frame" x="0.0" y="70" width="375" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="chartView" destination="8Qy-HC-4QJ" id="9ie-J7-yOR"/>
-                        <outlet property="conversionText" destination="uDB-zK-tRt" id="y7q-oK-O1S"/>
-                        <outlet property="cryptoPicker" destination="aIJ-wM-0TO" id="gYJ-zM-gvB"/>
+                        <outlet property="chartView" destination="8Qy-HC-4QJ" id="6uz-1h-pup"/>
+                        <outlet property="conversionText" destination="uDB-zK-tRt" id="KAz-ln-Uk2"/>
+                        <outlet property="cryptoPicker" destination="aIJ-wM-0TO" id="YvE-61-rCT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
