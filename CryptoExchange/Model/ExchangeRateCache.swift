@@ -10,4 +10,14 @@ import Foundation
 
 class ExchangeRateCache {
     
+    private var cache = [String : [String:Double]]()
+    
+    func invalidateCahche() {
+        self.cache.removeAll()
+    }
+    
+    func getEntry(crypto: String, real: String) -> Double {
+        return self.cache[crypto]![real]!
+    }
+    
 }
