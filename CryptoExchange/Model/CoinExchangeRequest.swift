@@ -52,5 +52,5 @@ class CoinExchangeRequest {
         let rateAsString = String(round(100 * exchangeRate) / 100)
         return "1 " + "\(cryptoCost)" + " = " + "\(rateAsString)" + " \(realCost)"
     }
-        
+    
 }

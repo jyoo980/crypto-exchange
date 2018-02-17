@@ -15,7 +15,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var cryptoPicker: UIPickerView!
     let graphView = CryptoGraphView()
-    let pickerValues = [["BCH", "BTC", "BTG", "ETH", "LTC", "XRP"], ["CAD", "USD", "GBP", "EUR", "JPY"]]
+    static let pickerValues = [["BCH", "BTC", "BTG", "ETH", "LTC", "XRP"], ["CAD", "USD", "GBP", "EUR", "JPY"]]
     let defaultMessage = "Select Below"
     
     override func viewDidLoad() {
@@ -45,12 +45,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func getSelectedCrypto() -> String {
         let cryptoChoiceIndex = cryptoPicker.selectedRow(inComponent: 0)
-        return pickerValues[0][cryptoChoiceIndex]
+        return ViewController.pickerValues[0][cryptoChoiceIndex]
     }
     
     func getSelectedReal() -> String {
         let currencyChoiceIndex = cryptoPicker.selectedRow(inComponent: 1)
-        return pickerValues[1][currencyChoiceIndex]
+        return ViewController.pickerValues[1][currencyChoiceIndex]
     }
     
     fileprivate func getExchangeRateGraph(coin: String) {
@@ -72,19 +72,19 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return pickerValues.count
+        return ViewController.pickerValues.count
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerValues[component].count
+        return ViewController.pickerValues[component].count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent
         component: Int) -> String? {
-        return pickerValues[component][row]
+        return ViewController.pickerValues[component][row]
     }
     
-    fileprivate func printReponse(data: Data?) {
+    static func printReponse(data: Data?) {
         let responseString = String(data: data!, encoding: String.Encoding.utf8)
         print("Conversion Rate Data:\n\(responseString!)")
     }
