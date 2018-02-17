@@ -17,18 +17,10 @@ class CoinExchangeRequest {
     let REAL_KEY = "asset_id_quote"
     let RATE_KEY = "rate"
     
-    fileprivate func generateRequestURL(crypto: String, country: String) -> URL? {
-        let apiKey = getAPIKey(key: "coinAPIKey")
-        var requestURL = self.exchRequest.replacingOccurrences(of: "{CRPTO}", with: crypto)
-        requestURL = requestURL.replacingOccurrences(of: "{REAL}", with: country)
-        requestURL = requestURL.replacingOccurrences(of: "{APIKEY}", with: apiKey)
-        return URL(string: requestURL)
-    }
-    
     func getConversionRate(crypto: String, country: String, completionHandler: @escaping (_ result:String) ->()) {
         let session = URLSession.shared
         let requestURL = generateRequestURL(crypto: crypto, country: country)
-
+        
         let dataTask = session.dataTask(with: requestURL!) { (data, response, error) in
             
             if let data = data {
@@ -44,6 +36,14 @@ class CoinExchangeRequest {
         
     }
     
+    fileprivate func generateRequestURL(crypto: String, country: String) -> URL? {
+        let apiKey = getAPIKey(key: "coinAPIKey")
+        var requestURL = self.exchRequest.replacingOccurrences(of: "{CRPTO}", with: crypto)
+        requestURL = requestURL.replacingOccurrences(of: "{REAL}", with: country)
+        requestURL = requestURL.replacingOccurrences(of: "{APIKEY}", with: apiKey)
+        return URL(string: requestURL)
+    }
+    
     fileprivate func parseConversionRate(responseDict: NSDictionary??) -> String {
         let cryptoCost = responseDict??.value(forKey: CRYPTO_KEY) as! String
         let realCost = responseDict??.value(forKey: REAL_KEY) as! String
@@ -52,6 +52,5 @@ class CoinExchangeRequest {
         let rateAsString = String(round(100 * exchangeRate) / 100)
         return "1 " + "\(cryptoCost)" + " = " + "\(rateAsString)" + " \(realCost)"
     }
-    
     
 }
