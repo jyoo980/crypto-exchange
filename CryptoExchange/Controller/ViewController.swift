@@ -14,20 +14,22 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var conversionText: UILabel!
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var cryptoPicker: UIPickerView!
-    
-    let pickerValues = [["BCH", "BTC", "BTG", "ETH", "LTC", "XRP"],
-                           ["CAD", "USD", "GBP", "EUR", "JPY"]]
-    let callExceedMessage = "API Calls Exceeded"
+    let graphView = CryptoGraphView()
+    let pickerValues = [["BCH", "BTC", "BTG", "ETH", "LTC", "XRP"], ["CAD", "USD", "GBP", "EUR", "JPY"]]
     let defaultMessage = "Select Below"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         cryptoPicker.delegate = self
         cryptoPicker.dataSource = self
-        self.initChart()
-        if self.conversionText.text != "Select Below" {
+        self.graphView.initChart(chart: self.chartView)
+        if self.conversionText.text != defaultMessage {
             self.displayDefault()
         }
+    }
+    
+    func displayDefault() {
+        self.conversionText.text = defaultMessage
     }
     
     override func didReceiveMemoryWarning() {
@@ -41,10 +43,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         getExchangeRateGraph(coin: selectedCrypto)
     }
     
-    func displayDefault() {
-        self.conversionText.text = defaultMessage
-    }
-    
     func getSelectedCrypto() -> String {
         let cryptoChoiceIndex = cryptoPicker.selectedRow(inComponent: 0)
         return pickerValues[0][cryptoChoiceIndex]
@@ -55,7 +53,24 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return pickerValues[1][currencyChoiceIndex]
     }
     
-    // Number of rows in our pickerView
+    fileprivate func getExchangeRateGraph(coin: String) {
+        let coinGraphRequest = CoinGraphRequest()
+        coinGraphRequest.getUpdatedChartData(crypto: coin, chartView: self.chartView)
+    }
+    
+    func updateConversionRate(crypto: String, realCurrency: String) {
+        let coinExchangeRequest = CoinExchangeRequest()
+        coinExchangeRequest.getConversionRate(crypto: crypto, country: realCurrency) { (result) -> () in
+            self.setExchangeRateLabel(rate: result)
+        }
+    }
+    
+    fileprivate func setExchangeRateLabel(rate: String) {
+        DispatchQueue.main.async {
+            self.conversionText.text = rate
+        }
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return pickerValues.count
     }
@@ -72,39 +87,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     fileprivate func printReponse(data: Data?) {
         let responseString = String(data: data!, encoding: String.Encoding.utf8)
         print("Conversion Rate Data:\n\(responseString!)")
-    }
-    
-    fileprivate func getExchangeRateGraph(coin: String) {
-        let coinGraphRequest = CoinGraphRequest()
-        coinGraphRequest.getUpdatedChartData(crypto: coin, chartView: self.chartView)
-    }
-    
-    fileprivate func initChart() {
-        self.chartView.noDataText = ""
-        self.chartView.chartDescription?.text = ""
-        self.chartView.xAxis.drawLabelsEnabled = false
-        self.chartView.xAxis.drawGridLinesEnabled = false
-        self.chartView.xAxis.drawAxisLineEnabled = false
-        self.chartView.leftAxis.drawAxisLineEnabled = false
-        self.chartView.leftAxis.drawLabelsEnabled = false
-        self.chartView.leftAxis.drawGridLinesEnabled = false
-        self.chartView.rightAxis.drawAxisLineEnabled = false
-        self.chartView.rightAxis.drawLabelsEnabled = false
-        self.chartView.rightAxis.drawGridLinesEnabled = false
-        self.chartView.legend.enabled = false
-    }
-    
-    func setExchangeRateLabel(rate: String) {
-        DispatchQueue.main.async {
-            self.conversionText.text = rate
-        }
-    }
-    
-    func updateConversionRate(crypto: String, realCurrency: String) {
-        let coinExchangeRequest = CoinExchangeRequest()
-        coinExchangeRequest.getConversionRate(crypto: crypto, country: realCurrency) { (result) -> () in
-            self.setExchangeRateLabel(rate: result)
-        }
     }
     
 }

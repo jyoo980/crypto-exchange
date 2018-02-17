@@ -10,6 +10,7 @@
 		1EC527C5F3B3BE5FF4C25304 /* Pods_CryptoExchange.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA81BC018452D2172E348194 /* Pods_CryptoExchange.framework */; };
 		350C817B20367CB2002A3297 /* CoinExchangeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350C817A20367CB2002A3297 /* CoinExchangeRequest.swift */; };
 		350C817D2036924B002A3297 /* CoinGraphRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350C817C2036924B002A3297 /* CoinGraphRequest.swift */; };
+		354A2EE62037E2910096042F /* CryptoGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 354A2EE52037E2910096042F /* CryptoGraphView.swift */; };
 		35897D8120316C14005C1F88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35897D8020316C14005C1F88 /* AppDelegate.swift */; };
 		35897D8320316C14005C1F88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35897D8220316C14005C1F88 /* ViewController.swift */; };
 		35897D8620316C14005C1F88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35897D8420316C14005C1F88 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		350C817A20367CB2002A3297 /* CoinExchangeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinExchangeRequest.swift; sourceTree = "<group>"; };
 		350C817C2036924B002A3297 /* CoinGraphRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinGraphRequest.swift; sourceTree = "<group>"; };
+		354A2EE52037E2910096042F /* CryptoGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoGraphView.swift; sourceTree = "<group>"; };
 		35897D7D20316C14005C1F88 /* CryptoExchange.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoExchange.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35897D8020316C14005C1F88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35897D8220316C14005C1F88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,6 +79,15 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		354A2EE22037DA310096042F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				354A2EE52037E2910096042F /* CryptoGraphView.swift */,
+			);
+			name = View;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		35897D7420316C14005C1F88 = {
 			isa = PBXGroup;
 			children = (
@@ -98,14 +109,15 @@
 		35897D7F20316C14005C1F88 /* CryptoExchange */ = {
 			isa = PBXGroup;
 			children = (
-				35897D8020316C14005C1F88 /* AppDelegate.swift */,
 				350C817E20369309002A3297 /* UI */,
 				350C81792036798C002A3297 /* Model */,
+				354A2EE22037DA310096042F /* View */,
 				350C817820367957002A3297 /* Controller */,
 				35897D8A20316C14005C1F88 /* Assets.xcassets */,
 				35897D8F20316C14005C1F88 /* Info.plist */,
 				35897D8720316C14005C1F88 /* CryptoExchange.xcdatamodeld */,
 				35C02F422033EB4000C668DC /* keys.plist */,
+				35897D8020316C14005C1F88 /* AppDelegate.swift */,
 			);
 			path = CryptoExchange;
 			sourceTree = "<group>";
@@ -261,6 +273,7 @@
 				35897D8920316C14005C1F88 /* CryptoExchange.xcdatamodeld in Sources */,
 				35897D8320316C14005C1F88 /* ViewController.swift in Sources */,
 				350C817B20367CB2002A3297 /* CoinExchangeRequest.swift in Sources */,
+				354A2EE62037E2910096042F /* CryptoGraphView.swift in Sources */,
 				350C817D2036924B002A3297 /* CoinGraphRequest.swift in Sources */,
 				35897D8120316C14005C1F88 /* AppDelegate.swift in Sources */,
 			);
