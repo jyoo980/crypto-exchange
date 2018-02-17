@@ -21,6 +21,6 @@ An easy way to check the most up-to-date exchange rates between popular cryptocu
 * Looking to add more support for other crytocurrencies 
 
 ## Todos
-* Refactor into MVC architecture - <strong>IN PROGRESS</strong>
+* Refactor into MVC architecture - <strong>Tentatively Complete</strong>
 * Introduce caching for API calls (workaround for 100 requests/24hr limit)
 * Introduce caching for historical data graphs (on app startup?)
