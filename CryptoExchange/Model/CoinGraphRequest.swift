@@ -31,16 +31,12 @@ class CoinGraphRequest {
             
             if let data = data {
                 DispatchQueue.main.async {
-                    let responseDict = self.parseToDict(responseData: data)
+                    let responseDict = dataToDict(data: data)
                     completionHandler(responseDict??["history"] as! NSArray)
                 }
             }
         }
         dataTask.resume()
-    }
-    
-    fileprivate func parseToDict(responseData: Data?) -> NSDictionary?? {
-        return try? JSONSerialization.jsonObject(with: responseData!, options: .allowFragments) as! NSDictionary
     }
     
     fileprivate func constructDataPoints(crypto: String, chart: LineChartView!) {

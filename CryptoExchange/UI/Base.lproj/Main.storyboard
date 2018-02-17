@@ -35,11 +35,11 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="updateButtonTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="vEb-wx-2ze"/>
+                                    <action selector="updateButtonTapped:" destination="BYZ-38-t0r" eventType="touchDown" id="REd-rb-63S"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDB-zK-tRt">
-                                <rect key="frame" x="44" y="15" width="287" height="168"/>
+                                <rect key="frame" x="0.0" y="15" width="375" height="168"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="highlightedColor"/>
@@ -54,9 +54,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="chartView" destination="8Qy-HC-4QJ" id="VQl-f2-nYY"/>
-                        <outlet property="conversionText" destination="uDB-zK-tRt" id="HoL-DW-UJP"/>
-                        <outlet property="cryptoPicker" destination="aIJ-wM-0TO" id="1it-xN-zbl"/>
+                        <outlet property="chartView" destination="8Qy-HC-4QJ" id="9ie-J7-yOR"/>
+                        <outlet property="conversionText" destination="uDB-zK-tRt" id="y7q-oK-O1S"/>
+                        <outlet property="cryptoPicker" destination="aIJ-wM-0TO" id="gYJ-zM-gvB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

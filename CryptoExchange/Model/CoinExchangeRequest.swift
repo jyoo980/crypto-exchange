@@ -32,7 +32,7 @@ class CoinExchangeRequest {
         let dataTask = session.dataTask(with: requestURL!) { (data, response, error) in
             
             if let data = data {
-                let responseDict = self.parseToDict(responseData: data)
+                let responseDict = dataToDict(data: data)
                 if responseDict??["error"] != nil {
                     completionHandler(self.callExceededText)
                 } else {
@@ -42,10 +42,6 @@ class CoinExchangeRequest {
         }
         dataTask.resume()
         
-    }
-    
-    fileprivate func parseToDict(responseData: Data?) -> NSDictionary?? {
-        return try? JSONSerialization.jsonObject(with: responseData!, options: .allowFragments) as! NSDictionary
     }
     
     fileprivate func parseConversionRate(responseDict: NSDictionary??) -> String {

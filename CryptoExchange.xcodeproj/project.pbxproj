@@ -17,7 +17,7 @@
 		35897D8B20316C14005C1F88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35897D8A20316C14005C1F88 /* Assets.xcassets */; };
 		35897D8E20316C14005C1F88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35897D8C20316C14005C1F88 /* LaunchScreen.storyboard */; };
 		35C02F432033EB4000C668DC /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35C02F422033EB4000C668DC /* keys.plist */; };
-		35C02F452033EB6900C668DC /* PropertyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C02F442033EB6900C668DC /* PropertyManager.swift */; };
+		35C02F452033EB6900C668DC /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C02F442033EB6900C668DC /* Utility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +32,7 @@
 		35897D8D20316C14005C1F88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		35897D8F20316C14005C1F88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35C02F422033EB4000C668DC /* keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
-		35C02F442033EB6900C668DC /* PropertyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyManager.swift; sourceTree = "<group>"; };
+		35C02F442033EB6900C668DC /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		861C08EEEF4ED92B14D07EFF /* Pods-CryptoExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CryptoExchange/Pods-CryptoExchange.debug.xcconfig"; sourceTree = "<group>"; };
 		AA81BC018452D2172E348194 /* Pods_CryptoExchange.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CryptoExchange.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA2FC9826B66886514AE66D8 /* Pods-CryptoExchange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoExchange.release.xcconfig"; path = "Pods/Target Support Files/Pods-CryptoExchange/Pods-CryptoExchange.release.xcconfig"; sourceTree = "<group>"; };
@@ -62,7 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				350C817C2036924B002A3297 /* CoinGraphRequest.swift */,
-				35C02F442033EB6900C668DC /* PropertyManager.swift */,
+				35C02F442033EB6900C668DC /* Utility.swift */,
 				350C817A20367CB2002A3297 /* CoinExchangeRequest.swift */,
 			);
 			path = Model;
@@ -257,7 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				35C02F452033EB6900C668DC /* PropertyManager.swift in Sources */,
+				35C02F452033EB6900C668DC /* Utility.swift in Sources */,
 				35897D8920316C14005C1F88 /* CryptoExchange.xcdatamodeld in Sources */,
 				35897D8320316C14005C1F88 /* ViewController.swift in Sources */,
 				350C817B20367CB2002A3297 /* CoinExchangeRequest.swift in Sources */,
