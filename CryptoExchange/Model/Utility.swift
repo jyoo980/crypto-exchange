@@ -18,4 +18,3 @@ func getAPIKey(key: String) -> String {
 func dataToDict(data: Data?) -> NSDictionary?? {
     return try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
 }
-

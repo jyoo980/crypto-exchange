@@ -11,7 +11,7 @@ import Foundation
 class ExchangeCacheRequest {
     
     private var request = "https://rest.coinapi.io/v1/exchangerate/{CRYPTO}?apikey={APIKEY}"
-    private let cacheRequestError = "Cache Error"
+    private let cacheRequestError = "CACHE ERROR"
     
     func populateCache() {
         let cryptoCurrencies = ViewController.pickerValues[0]

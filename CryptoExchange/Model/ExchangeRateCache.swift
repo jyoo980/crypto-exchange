@@ -34,7 +34,6 @@ class ExchangeRateCache {
         return CACHE_ERROR
     }
         
-    
     func set(crypto: String, real: String, conversionRate: Double) {
         let duple = [real : conversionRate]
         if (self.cache[crypto] == nil) {
@@ -44,6 +43,5 @@ class ExchangeRateCache {
             self.cache[crypto]?.append(duple)
         }
     }
- 
     
 }

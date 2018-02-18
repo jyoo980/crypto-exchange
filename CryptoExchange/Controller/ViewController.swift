@@ -15,7 +15,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var cryptoPicker: UIPickerView!
     let graphView = CryptoGraphView()
-    static let pickerValues = [["BTC"], ["CAD", "EUR", "USD"]]
+    static let pickerValues = [["BTC", "ETH"], ["CAD", "EUR", "USD"]]
     //static let pickerValues = [["BCH", "BTC", "BTG", "ETH", "LTC", "XRP"], ["CAD","EUR", "GBP", "JPY", "USD"]]
     let defaultMessage = "Select Below"
     
@@ -40,7 +40,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBAction func updateButtonTapped(_ sender: UIButton) {
         let selectedCrypto = getSelectedCrypto()
         let selectedReal = getSelectedReal()
-        updateConversionRate(crypto: selectedCrypto, realCurrency: selectedReal)
+//        updateConversionRate(crypto: selectedCrypto, realCurrency: selectedReal)
+        updateConversionRateCheckCache(crypto: selectedCrypto, realCurrency: selectedReal)
         getExchangeRateGraph(coin: selectedCrypto)
     }
     
@@ -66,7 +67,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
-    // This one checks the cache first
     func updateConversionRateCheckCache(crypto: String, realCurrency: String) {
         let coinExchangeRequest = CoinExchangeRequest()
         let cacheFetch = coinExchangeRequest.fetchFromCache(crypto: crypto, country: realCurrency)
