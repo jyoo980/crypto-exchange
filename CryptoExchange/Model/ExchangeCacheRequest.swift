@@ -54,9 +54,9 @@ class ExchangeCacheRequest {
             ExchangeRateCache.shared.set(crypto: crypto, real: currency, conversionRate: exchRate)
         }
     }
-        
+    
     fileprivate func sanitizeRate(rate: NSNumber) -> Double {
-        return Double(rate.intValue)
+        return rate.doubleValue
     }
     
 }
