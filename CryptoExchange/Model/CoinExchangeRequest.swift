@@ -21,7 +21,7 @@ class CoinExchangeRequest {
     
     func fetchFromCache(crypto: String, country: String) -> String {
         let fetchedVal = cache.fetch(crypto: crypto, real: country)
-        if (fetchedVal != cache.CACHE_ERROR) {
+        if (fetchedVal != cache.CACHE_MISS) {
             return conversionString(cryptoCurrency: crypto, rate: fetchedVal, countryCode: country)
         } else {
             return CACHE_MISS

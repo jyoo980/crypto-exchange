@@ -13,7 +13,7 @@ class ExchangeRateCache {
     static let shared = ExchangeRateCache()
     
     var cache : [String:[[String:Double]]]
-    var CACHE_ERROR = -1.0
+    var CACHE_MISS = -1.0
     
     private init() {
         self.cache = [String:[[String:Double]]]()
@@ -25,13 +25,21 @@ class ExchangeRateCache {
     
     func fetch(crypto: String, real: String) -> Double {
         let rateArray = self.cache[crypto]
+        if rateArray == nil {
+            return CACHE_MISS
+        } else {
+            return attemptFetch(rateArray, real)
+        }
+    }
+    
+    fileprivate func attemptFetch(_ rateArray: [[String : Double]]?, _ real: String) -> Double {
         for rate in rateArray! {
             let hit = rate[real]
             if hit != nil {
                 return hit!
             }
         }
-        return CACHE_ERROR
+        return CACHE_MISS
     }
         
     func set(crypto: String, real: String, conversionRate: Double) {
