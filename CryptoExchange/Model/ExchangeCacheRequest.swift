@@ -10,7 +10,7 @@ import Foundation
 
 class ExchangeCacheRequest {
     
-    private var request = "https://rest.coinapi.io/v1/exchangerate/{CRYPTO}?apikey={APIKEY}"
+    private var request = "https://min-api.cryptocompare.com/data/price?fsym={CRYPTO}&tsyms={CURRENCIES}"
     private let cacheRequestError = "CACHE ERROR"
     
     func populateCache() {
@@ -29,7 +29,7 @@ class ExchangeCacheRequest {
             if let data = data {
                 let responseDict = dataToDict(data: data)
                 if responseDict??["error"] == nil {
-                    self.setCache(currency: crypto, responseDict: responseDict)
+                    self.setCache(crypto: crypto, rateDict: responseDict)
                 }
             }
         }
@@ -37,28 +37,26 @@ class ExchangeCacheRequest {
     }
     
     fileprivate func generateCacheURL(crypto: String) -> URL? {
-        let apiKey = getAPIKey(key: "coinAPIKey")
-        var requestURL = self.request.replacingOccurrences(of: "{APIKEY}", with: apiKey)
-        requestURL = requestURL.replacingOccurrences(of: "{CRYPTO}", with: crypto)
+        let currencyList = self.currencyList()
+        var requestURL = self.request.replacingOccurrences(of: "{CRYPTO}", with: crypto)
+        requestURL = requestURL.replacingOccurrences(of: "{CURRENCIES}", with: currencyList)
         return URL(string: requestURL)
     }
     
-    fileprivate func setCache(currency: String, responseDict: NSDictionary??) {
-        let rateArray = responseDict??.value(forKey: "rates") as! NSArray
-        for realCurrency in ViewController.pickerValues[1] {
-            for rateEntry in rateArray {
-                let rateDict = rateEntry as! NSDictionary
-                if realCurrency == rateDict["asset_id_quote"] as! String {
-                    let exchangeRate = sanitizeRate(rate: rateDict["rate"] as! NSDecimalNumber)
-                    ExchangeRateCache.shared.set(crypto: currency, real: realCurrency, conversionRate: exchangeRate)
-                }
-            }
-        }
+    fileprivate func currencyList() -> String {
+        return ViewController.pickerValues[1].joined(separator: ",")
     }
     
-    fileprivate func sanitizeRate(rate: NSDecimalNumber) -> Double {
-        let rateAsDouble = rate.doubleValue
-        return round(100 * rateAsDouble) / 100
+    fileprivate func setCache(crypto: String, rateDict: NSDictionary??) {
+        let currencies = ViewController.pickerValues[1]
+        for currency in currencies {
+            let exchRate = sanitizeRate(rate: rateDict??.value(forKey: currency) as! NSNumber)
+            ExchangeRateCache.shared.set(crypto: crypto, real: currency, conversionRate: exchRate)
+        }
+    }
+        
+    fileprivate func sanitizeRate(rate: NSNumber) -> Double {
+        return Double(rate.intValue)
     }
     
 }
