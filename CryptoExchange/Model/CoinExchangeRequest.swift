@@ -16,6 +16,17 @@ class CoinExchangeRequest {
     let CRYPTO_KEY = "asset_id_base"
     let REAL_KEY = "asset_id_quote"
     let RATE_KEY = "rate"
+    let cache = ExchangeRateCache.shared
+    let CACHE_MISS = "-1"
+    
+    func fetchFromCache(crypto: String, country: String) -> String {
+        let fetchedVal = cache.fetch(crypto: crypto, real: country)
+        if (fetchedVal != cache.CACHE_ERROR) {
+            return conversionString(cryptoCurrency: crypto, rate: fetchedVal, countryCode: country)
+        } else {
+            return CACHE_MISS
+        }
+    }
     
     func getConversionRate(crypto: String, country: String, completionHandler: @escaping (_ result:String) ->()) {
         let session = URLSession.shared
@@ -49,8 +60,12 @@ class CoinExchangeRequest {
         let realCost = responseDict??.value(forKey: REAL_KEY) as! String
         let rateAsDouble = responseDict??.value(forKey: RATE_KEY) as! NSDecimalNumber
         let exchangeRate = rateAsDouble.doubleValue
-        let rateAsString = String(round(100 * exchangeRate) / 100)
-        return "1 " + "\(cryptoCost)" + " = " + "\(rateAsString)" + " \(realCost)"
+        let rate = round(100 * exchangeRate) / 100
+        return conversionString(cryptoCurrency: cryptoCost, rate: rate, countryCode: realCost)
+    }
+    
+    fileprivate func conversionString(cryptoCurrency: String, rate: Double, countryCode: String) -> String {
+        return "1 " + "\(cryptoCurrency)" + " = " + "\(rate)" + " \(countryCode)"
     }
     
 }

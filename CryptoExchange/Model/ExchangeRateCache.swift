@@ -12,10 +12,11 @@ class ExchangeRateCache {
     
     static let shared = ExchangeRateCache()
     
-    var cache : [String:[String:Double]]
+    var cache : [String:[[String:Double]]]
+    var CACHE_ERROR = -1.0
     
-    init() {
-        self.cache = [String:[String:Double]]()
+    private init() {
+        self.cache = [String:[[String:Double]]]()
     }
     
     func invalidate() {
@@ -23,11 +24,26 @@ class ExchangeRateCache {
     }
     
     func fetch(crypto: String, real: String) -> Double {
-        return self.cache[crypto]![real]!
+        let rateArray = self.cache[crypto]
+        for rate in rateArray! {
+            let hit = rate[real]
+            if hit != nil {
+                return hit!
+            }
+        }
+        return CACHE_ERROR
     }
+        
     
     func set(crypto: String, real: String, conversionRate: Double) {
-        self.cache[crypto]![real]! = conversionRate
+        let duple = [real : conversionRate]
+        if (self.cache[crypto] == nil) {
+            self.cache[crypto] = []
+            self.cache[crypto]?.append(duple)
+        } else {
+            self.cache[crypto]?.append(duple)
+        }
     }
+ 
     
 }
