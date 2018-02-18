@@ -62,9 +62,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "generateRequestURL(crypto:country:)"
-            landmarkType = "7">
+            endingLineNumber = "54">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -78,9 +76,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "generateRequestURL(crypto:country:)"
-            landmarkType = "7">
+            endingLineNumber = "55">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -94,57 +90,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "generateRequestURL(crypto:country:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CryptoExchange/Model/CoinExchangeRequest.swift"
-            timestampString = "540623662.383842"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "parseConversionRate(responseDict:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CryptoExchange.CoinExchangeRequest.(parseConversionRate in _A8CEC4B880E07ED889C8ADC98D3B9FE3)(responseDict: Swift.Optional&lt;Swift.Optional&lt;__ObjC.NSDictionary&gt;&gt;) -&gt; Swift.String"
-                  moduleName = "CryptoExchange"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jyoo/Desktop/crypto-exchange/CryptoExchange/Model/CoinExchangeRequest.swift"
-                  timestampString = "540463078.405853"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52"
-                  offsetFromSymbolStart = "19">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CryptoExchange.CoinExchangeRequest.(parseConversionRate in _A8CEC4B880E07ED889C8ADC98D3B9FE3)(responseDict: Swift.Optional&lt;Swift.Optional&lt;__ObjC.NSDictionary&gt;&gt;) -&gt; Swift.String"
-                  moduleName = "CryptoExchange"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jyoo/Desktop/crypto-exchange/CryptoExchange/Model/CoinExchangeRequest.swift"
-                  timestampString = "540463078.4088171"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "52"
-                  endingLineNumber = "52"
-                  offsetFromSymbolStart = "3886">
-               </Location>
-            </Locations>
+            endingLineNumber = "53">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -218,7 +164,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/ExchangeRateCache.swift"
-            timestampString = "540680110.920033"
+            timestampString = "540680210.9692841"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "15"
@@ -282,7 +228,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/ExchangeRateCache.swift"
-            timestampString = "540680110.920171"
+            timestampString = "540680210.969376"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "47"
@@ -298,7 +244,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/ExchangeRateCache.swift"
-            timestampString = "540680110.920254"
+            timestampString = "540680210.969606"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "46"
@@ -314,7 +260,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/ExchangeRateCache.swift"
-            timestampString = "540680110.920354"
+            timestampString = "540680210.969687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "49"
@@ -330,7 +276,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/ExchangeRateCache.swift"
-            timestampString = "540680110.920428"
+            timestampString = "540680210.969762"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
@@ -346,7 +292,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/ExchangeRateCache.swift"
-            timestampString = "540680110.920506"
+            timestampString = "540680210.969835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "51"
@@ -362,7 +308,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Controller/ViewController.swift"
-            timestampString = "540680110.920589"
+            timestampString = "540680210.969906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
@@ -378,7 +324,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/ExchangeCacheRequest.swift"
-            timestampString = "540680110.921177"
+            timestampString = "540680210.969968"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
@@ -394,7 +340,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/ExchangeCacheRequest.swift"
-            timestampString = "540680110.921378"
+            timestampString = "540680210.9704241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
@@ -410,7 +356,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/ExchangeCacheRequest.swift"
-            timestampString = "540680110.921482"
+            timestampString = "540680210.970735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "25"
@@ -426,7 +372,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/ExchangeCacheRequest.swift"
-            timestampString = "540680110.921572"
+            timestampString = "540680210.971031"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "27"
@@ -474,7 +420,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/ExchangeCacheRequest.swift"
-            timestampString = "540680110.921665"
+            timestampString = "540680210.971342"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "53"
@@ -522,7 +468,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/ExchangeRateCache.swift"
-            timestampString = "540680110.921761"
+            timestampString = "540680210.971628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
@@ -538,7 +484,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/ExchangeCacheRequest.swift"
-            timestampString = "540680110.921837"
+            timestampString = "540680210.9716901"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "50"
@@ -554,7 +500,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/ExchangeRateCache.swift"
-            timestampString = "540680110.9219069"
+            timestampString = "540680210.971957"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "27"
@@ -570,12 +516,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/ExchangeCacheRequest.swift"
-            timestampString = "540680110.921977"
+            timestampString = "540680210.972017"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
             endingLineNumber = "59"
             landmarkName = "sanitizeRate(rate:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CryptoExchange/Model/ExchangeRateCache.swift"
+            timestampString = "540680210.972322"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "set(crypto:real:conversionRate:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
