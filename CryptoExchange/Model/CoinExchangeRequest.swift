@@ -11,7 +11,7 @@ import Charts
 
 class CoinExchangeRequest {
     
-    private var exchRequest = "https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey={APIKEY}"
+    private let exchRequest = "https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey={APIKEY}"
     let callExceededText = "API Calls Exceeded"
     let CRYPTO_KEY = "asset_id_base"
     let REAL_KEY = "asset_id_quote"

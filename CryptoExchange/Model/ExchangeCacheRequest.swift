@@ -10,7 +10,7 @@ import Foundation
 
 class ExchangeCacheRequest {
     
-    private var request = "https://min-api.cryptocompare.com/data/price?fsym={CRYPTO}&tsyms={CURRENCIES}"
+    private let request = "https://min-api.cryptocompare.com/data/price?fsym={CRYPTO}&tsyms={CURRENCIES}"
     private let cacheRequestError = "CACHE ERROR"
     
     func populateCache() {
