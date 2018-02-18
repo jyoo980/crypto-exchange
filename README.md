@@ -10,10 +10,11 @@ An easy way to check the most up-to-date exchange rates between popular cryptocu
 ## Development Requirements
 * To use Charts for iOS, you need to install `Cocoapods` via `Ruby`. Luckily, macOS ships with Ruby in the base installation,  so all you need to do after cloning this repo is to `cd` into `crypto-exchange` and run `sudo gem install cocoapods`, then run `pod install`.
 
-## Techonologies
+## Technologies
 * CoinAPI (for most up-to-date exchange rates)
 * CoinbinAPI (for historical exchange rates)
 * Charts for iOS
+* Implemented custom cache
 
 ## Current facts
 * Request URL: https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey={KEY}
