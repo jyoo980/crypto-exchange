@@ -12,7 +12,7 @@ import Charts
 class CoinExchangeRequest {
     
     private let exchRequest = "https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey={APIKEY}"
-    let callExceededText = "API Calls Exceeded"
+    let API_ERROR = "API Error"
     let CRYPTO_KEY = "asset_id_base"
     let REAL_KEY = "asset_id_quote"
     let RATE_KEY = "rate"
@@ -37,7 +37,7 @@ class CoinExchangeRequest {
             if let data = data {
                 let responseDict = dataToDict(data: data)
                 if responseDict??["error"] != nil {
-                    completionHandler(self.callExceededText)
+                    completionHandler(self.API_ERROR)
                 } else {
                     completionHandler(self.parseConversionRate(responseDict: responseDict))
                 }

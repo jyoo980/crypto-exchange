@@ -12,6 +12,7 @@ import Charts
 class CoinGraphRequest {
     
     private var graphRequest = "https://coinbin.org/{CRYPTO}/history"
+    private let DAYS_IN_YEAR = 365
     var chartData = LineChartData()
             
     func getUpdatedChartData(crypto: String, chartView: LineChartView!) {
@@ -61,10 +62,10 @@ class CoinGraphRequest {
     }
     
     fileprivate func setMaxIter(array: NSArray) -> Int {
-        if (array.count < 365) {
+        if (array.count < DAYS_IN_YEAR) {
             return array.count - 1
         } else {
-            return 365
+            return DAYS_IN_YEAR
         }
     }
     
