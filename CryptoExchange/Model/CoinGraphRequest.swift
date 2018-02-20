@@ -30,6 +30,8 @@ class CoinGraphRequest {
             let data = LineChartData()
                 data.addDataSet(dataSet)
                 chart.data = data
+                chart.animate(xAxisDuration: 1)
+                chart.animate(yAxisDuration: 1)
         }
     }
     

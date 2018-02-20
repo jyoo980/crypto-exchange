@@ -38,4 +38,8 @@ class CryptoGraphView {
         chart.rightAxis.drawGridLinesEnabled = false
     }
     
+    fileprivate func setGraphOptions(chart: LineChartView!) {
+        chart.animate(xAxisDuration: 3000)
+    }
+    
 }
