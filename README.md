@@ -1,6 +1,6 @@
 # crypto-exchange
 
-An easy way to check the most up-to-date exchange rates between popular cryptocurrencies and real-world currency. Built using the CoinBase API. crypo-exchange also shows historical exchange rate data for cryptocurrencies, going back up to a year. Below are some screenshots of the app in action.
+An easy way to check the most up-to-date exchange rates between popular cryptocurrencies and real-world currency. crypo-exchange uses the CryptoCompare API to get the exchange rates for over 5 commonly used cryptocurrencies, and stores them in a custom cache. crypo-exchange also shows historical exchange rate data for cryptocurrencies, going back up to a year. Below are some screenshots of the app in action.
 
 <p align="center">
 <img src="https://github.com/jyoo980/crypto-exchange/blob/master/CryptoExchange/Assets.xcassets/v1.2-p1.imageset/v1.2-p1.png" width="327" height="561" style="float: left; width: 30%; margin-right: 1%; margin-bottom: 0.5em;">
@@ -12,6 +12,7 @@ An easy way to check the most up-to-date exchange rates between popular cryptocu
 
 ## Technologies
 * CryptoCompare API (for most up-to-date exchange rates)
+* CoinAPI (backup API for cache misses)
 * Coinbin API (for historical exchange rates)
 * Charts for iOS
 * Custom Cache - `ExchangeRateCache.swift` 
