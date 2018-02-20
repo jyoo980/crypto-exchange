@@ -12,6 +12,7 @@ import Charts
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var conversionText: UILabel!
+    @IBOutlet weak var graphLabelText : UILabel!
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var cryptoPicker: UIPickerView!
     let graphView = CryptoGraphView()
@@ -23,6 +24,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         cryptoPicker.delegate = self
         cryptoPicker.dataSource = self
         self.graphView.initChart(chart: self.chartView)
+        self.graphLabelText.isHidden = true
         if self.conversionText.text != defaultMessage {
             self.displayDefault()
         }
@@ -39,6 +41,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBAction func updateButtonTapped(_ sender: UIButton) {
         let selectedCrypto = getSelectedCrypto()
         let selectedReal = getSelectedReal()
+        self.graphLabelText.text = selectedCrypto
+        self.graphLabelText.isHidden = false
         updateConversionRateCheckCache(crypto: selectedCrypto, realCurrency: selectedReal)
         getExchangeRateGraph(coin: selectedCrypto)
     }
