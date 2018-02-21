@@ -23,15 +23,19 @@ class CoinGraphRequest {
         return URL(string: requestURL)
     }
     
+    fileprivate func setGraph(_ dataSet: LineChartDataSet, _ chart: LineChartView!) {
+        let data = LineChartData()
+        data.addDataSet(dataSet)
+        chart.data = data
+        chart.animate(xAxisDuration: 1)
+        chart.animate(yAxisDuration: 1)
+    }
+    
     fileprivate func dispatchRequest(_ crypto: String, _ chart: LineChartView!) {
         getHistory(crypto: crypto) { (result) -> () in
             let dataSet = self.constructDataSet(history: result)
             GraphDataCache.shared.set(crypto: crypto, data: dataSet)
-            let data = LineChartData()
-            data.addDataSet(dataSet)
-            chart.data = data
-            chart.animate(xAxisDuration: 1)
-            chart.animate(yAxisDuration: 1)
+            self.setGraph(dataSet, chart)
         }
     }
     
@@ -39,12 +43,10 @@ class CoinGraphRequest {
         let dataCache = GraphDataCache.shared
         if (dataCache.dataSetPresent(crypto: crypto)) {
             let dataSet = dataCache.fetch(crypto: crypto)
-            let data = LineChartData()
-            chart.data = data
-            chart.animate(xAxisDuration: 1)
-            chart.animate(yAxisDuration: 1)
+            self.setGraph(dataSet, chart)
+        } else {
+            dispatchRequest(crypto, chart)
         }
-        dispatchRequest(crypto, chart)
     }
     
     fileprivate func getHistory(crypto: String, completionHandler: @escaping (_ result:NSArray) ->()) {
