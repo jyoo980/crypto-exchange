@@ -20,6 +20,7 @@
 		35897D8B20316C14005C1F88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35897D8A20316C14005C1F88 /* Assets.xcassets */; };
 		35897D8E20316C14005C1F88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35897D8C20316C14005C1F88 /* LaunchScreen.storyboard */; };
 		35C02F452033EB6900C668DC /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C02F442033EB6900C668DC /* Utility.swift */; };
+		35F0C63E203D101100999D3D /* GraphDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F0C63D203D101100999D3D /* GraphDataCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		35897D8D20316C14005C1F88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		35897D8F20316C14005C1F88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35C02F442033EB6900C668DC /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		35F0C63D203D101100999D3D /* GraphDataCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphDataCache.swift; sourceTree = "<group>"; };
 		861C08EEEF4ED92B14D07EFF /* Pods-CryptoExchange.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoExchange.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CryptoExchange/Pods-CryptoExchange.debug.xcconfig"; sourceTree = "<group>"; };
 		AA81BC018452D2172E348194 /* Pods_CryptoExchange.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CryptoExchange.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA2FC9826B66886514AE66D8 /* Pods-CryptoExchange.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CryptoExchange.release.xcconfig"; path = "Pods/Target Support Files/Pods-CryptoExchange/Pods-CryptoExchange.release.xcconfig"; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				350C817A20367CB2002A3297 /* CoinExchangeRequest.swift */,
 				35847AE22038D4D400233ED1 /* ExchangeCacheRequest.swift */,
 				35847AE42038D81000233ED1 /* ExchangeRateCache.swift */,
+				35F0C63D203D101100999D3D /* GraphDataCache.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				35847AE52038D81000233ED1 /* ExchangeRateCache.swift in Sources */,
 				350C817B20367CB2002A3297 /* CoinExchangeRequest.swift in Sources */,
 				35847ADF2037E97D00233ED1 /* CryptoGraphView.swift in Sources */,
+				35F0C63E203D101100999D3D /* GraphDataCache.swift in Sources */,
 				350C817D2036924B002A3297 /* CoinGraphRequest.swift in Sources */,
 				35897D8120316C14005C1F88 /* AppDelegate.swift in Sources */,
 			);

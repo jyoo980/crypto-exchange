@@ -13,8 +13,7 @@ class CoinGraphRequest {
     
     private var graphRequest = "https://coinbin.org/{CRYPTO}/history"
     private let DAYS_IN_YEAR = 365
-    var chartData = LineChartData()
-            
+    
     func getUpdatedChartData(crypto: String, chartView: LineChartView!) {
         self.constructDataPoints(crypto: crypto, chart: chartView)
     }
@@ -24,15 +23,28 @@ class CoinGraphRequest {
         return URL(string: requestURL)
     }
     
-    fileprivate func constructDataPoints(crypto: String, chart: LineChartView!) {
+    fileprivate func dispatchRequest(_ crypto: String, _ chart: LineChartView!) {
         getHistory(crypto: crypto) { (result) -> () in
             let dataSet = self.constructDataSet(history: result)
+            GraphDataCache.shared.set(crypto: crypto, data: dataSet)
             let data = LineChartData()
-                data.addDataSet(dataSet)
-                chart.data = data
-                chart.animate(xAxisDuration: 1)
-                chart.animate(yAxisDuration: 1)
+            data.addDataSet(dataSet)
+            chart.data = data
+            chart.animate(xAxisDuration: 1)
+            chart.animate(yAxisDuration: 1)
         }
+    }
+    
+    fileprivate func constructDataPoints(crypto: String, chart: LineChartView!) {
+        let dataCache = GraphDataCache.shared
+        if (dataCache.dataSetPresent(crypto: crypto)) {
+            let dataSet = dataCache.fetch(crypto: crypto)
+            let data = LineChartData()
+            chart.data = data
+            chart.animate(xAxisDuration: 1)
+            chart.animate(yAxisDuration: 1)
+        }
+        dispatchRequest(crypto, chart)
     }
     
     fileprivate func getHistory(crypto: String, completionHandler: @escaping (_ result:NSArray) ->()) {
