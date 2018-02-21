@@ -26,3 +26,4 @@ An easy way to check the most up-to-date exchange rates between popular cryptocu
 * Introduce caching for API calls (workaround for 100 requests/24hr limit) - <strong>Complete</strong>
 * Refactor to use with API which has unlimited calls - <strong>Complete</strong>
 * Introduce caching for historical data graphs - <strong>Complete</strong>
+<strong>Note:</strong> new TODOs can be seen in the [projects](https://github.com/jyoo980/crypto-exchange/projects/1) section of this repository.
