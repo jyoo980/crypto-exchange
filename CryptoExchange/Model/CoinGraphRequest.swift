@@ -15,7 +15,7 @@ class CoinGraphRequest {
     private let DAYS_IN_YEAR = 365
     
     func getUpdatedChartData(crypto: String, chartView: LineChartView!) {
-        self.constructDataPoints(crypto: crypto, chart: chartView)
+        self.constructDataPoints(crypto: crypto, chart: chartView)        
     }
     
     fileprivate func generateRequestURL(cryptoCurrency: String) -> URL? {

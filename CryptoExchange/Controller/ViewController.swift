@@ -14,9 +14,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var conversionText: UILabel!
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var cryptoPicker: UIPickerView!
-    let graphView = CryptoGraphView()
     static let pickerValues = [["BCH","BTC","BTG","DOGE","ETH", "LTC", "XRP"], ["CAD", "EUR","GBP", "JPY", "USD"]]
-    let defaultMessage = "Select Below"
+    private let graphView = CryptoGraphView()
+    private let defaultMessage = "Select Below"
+    private var prevSelectedCoin = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +55,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     fileprivate func getExchangeRateGraph(coin: String) {
-        let coinGraphRequest = CoinGraphRequest()
-        coinGraphRequest.getUpdatedChartData(crypto: coin, chartView: self.chartView)
+        if (self.prevSelectedCoin != coin) {
+            self.prevSelectedCoin = coin
+            let coinGraphRequest = CoinGraphRequest()
+            coinGraphRequest.getUpdatedChartData(crypto: coin, chartView: self.chartView)
+        }
     }
     
     func updateConversionRate(crypto: String, realCurrency: String) {
