@@ -14,6 +14,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var conversionText: UILabel!
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var cryptoPicker: UIPickerView!
+    
     static let pickerValues = [["BCH","BTC","BTG","DOGE","ETH", "LTC", "XRP"], ["CAD", "EUR","GBP", "JPY", "USD"]]
     private let graphView = CryptoGraphView()
     private let defaultMessage = "Select Below"
