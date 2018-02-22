@@ -15,6 +15,7 @@ class CryptoGraphView {
         chart.noDataText = ""
         chart.chartDescription?.text = ""
         chart.legend.enabled = false
+        chart.isUserInteractionEnabled = false
         setXAxis(chart: chart)
         setLeftAxis(chart: chart)
         setRightAxis(chart: chart)
@@ -37,9 +38,5 @@ class CryptoGraphView {
         chart.rightAxis.drawLabelsEnabled = false
         chart.rightAxis.drawGridLinesEnabled = false
     }
-    
-    fileprivate func setGraphOptions(chart: LineChartView!) {
-        chart.animate(xAxisDuration: 3000)
-    }
-    
+
 }
