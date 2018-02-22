@@ -25,10 +25,10 @@ class ExchangeRateCache {
     
     func fetch(crypto: String, real: String) -> Double {
         let rateArray = self.cache[crypto]
-        if rateArray == nil {
-            return CACHE_MISS
-        } else {
+        if rateArray != nil {
             return attemptFetch(rateArray, real)
+        } else {
+            return CACHE_MISS
         }
     }
     
@@ -44,10 +44,10 @@ class ExchangeRateCache {
         
     func set(crypto: String, real: String, conversionRate: Double) {
         let duple = [real : conversionRate]
-        if (self.cache[crypto] == nil) {
-            self.cache[crypto] = []
+        if (self.cache[crypto] != nil) {
             self.cache[crypto]?.append(duple)
-        } else {
+        } else {            
+            self.cache[crypto] = []
             self.cache[crypto]?.append(duple)
         }
     }
