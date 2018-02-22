@@ -8,13 +8,6 @@
 
 import Foundation
 
-func getAPIKey(key: String) -> String {
-    let filePath = Bundle.main.path(forResource: "keys", ofType: "plist")
-    let plist = NSDictionary(contentsOfFile:filePath!)
-    let value = plist?.object(forKey: key) as! String
-    return value
-}
-
 func dataToDict(data: Data?) -> NSDictionary?? {
     return try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
 }

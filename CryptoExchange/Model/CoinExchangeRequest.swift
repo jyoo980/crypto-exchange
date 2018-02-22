@@ -11,11 +11,8 @@ import Charts
 
 class CoinExchangeRequest {
     
-    private let exchRequest = "https://rest.coinapi.io/v1/exchangerate/{CRPTO}/{REAL}?apikey={APIKEY}"
+    private let request = "https://min-api.cryptocompare.com/data/price?fsym={CRYPTO}&tsyms={CURRENCIES}"
     let API_ERROR = "API Error"
-    let CRYPTO_KEY = "asset_id_base"
-    let REAL_KEY = "asset_id_quote"
-    let RATE_KEY = "rate"
     let cache = ExchangeRateCache.shared
     let CACHE_MISS = "-1"
     
@@ -39,7 +36,7 @@ class CoinExchangeRequest {
                 if responseDict??["error"] != nil {
                     completionHandler(self.API_ERROR)
                 } else {
-                    completionHandler(self.parseConversionRate(responseDict: responseDict))
+                    completionHandler(self.parseConversionRate(responseDict: responseDict,currency: crypto, country: country))
                 }
             }
         }
@@ -48,20 +45,16 @@ class CoinExchangeRequest {
     }
     
     fileprivate func generateRequestURL(crypto: String, country: String) -> URL? {
-        let apiKey = getAPIKey(key: "coinAPIKey")
-        var requestURL = self.exchRequest.replacingOccurrences(of: "{CRPTO}", with: crypto)
-        requestURL = requestURL.replacingOccurrences(of: "{REAL}", with: country)
-        requestURL = requestURL.replacingOccurrences(of: "{APIKEY}", with: apiKey)
+        var requestURL = self.request.replacingOccurrences(of: "{CRYPTO}", with: crypto)
+        requestURL = requestURL.replacingOccurrences(of: "{CURRENCIES}", with: country)
         return URL(string: requestURL)
     }
     
-    fileprivate func parseConversionRate(responseDict: NSDictionary??) -> String {
-        let cryptoCost = responseDict??.value(forKey: CRYPTO_KEY) as! String
-        let realCost = responseDict??.value(forKey: REAL_KEY) as! String
-        let rateAsDouble = responseDict??.value(forKey: RATE_KEY) as! NSDecimalNumber
+    fileprivate func parseConversionRate(responseDict: NSDictionary??, currency: String, country: String) -> String {
+        let rateAsDouble = responseDict??.value(forKey: country) as! NSNumber
         let exchangeRate = rateAsDouble.doubleValue
         let rate = round(100 * exchangeRate) / 100
-        return conversionString(cryptoCurrency: cryptoCost, rate: rate, countryCode: realCost)
+        return conversionString(cryptoCurrency: currency, rate: rate, countryCode: country)
     }
     
     fileprivate func conversionString(cryptoCurrency: String, rate: Double, countryCode: String) -> String {
