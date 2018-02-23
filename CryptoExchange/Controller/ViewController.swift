@@ -9,11 +9,12 @@
 import UIKit
 import Charts
 
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIViewControllerPreviewingDelegate {
     
     @IBOutlet weak var conversionText: UILabel!
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var cryptoPicker: UIPickerView!
+
     
     static let pickerValues = [["BCH","BTC","BTG","DOGE","ETH", "LTC", "XRP"], ["CAD", "EUR","GBP", "JPY", "USD"]]
     private let graphView = CryptoGraphView()
@@ -22,6 +23,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        enableForceTouch()
         cryptoPicker.delegate = self
         cryptoPicker.dataSource = self
         self.graphView.initChart(chart: self.chartView)
@@ -32,6 +34,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func displayDefault() {
         self.conversionText.text = defaultMessage
+    }
+    
+    func enableForceTouch() {
+        if (traitCollection.forceTouchCapability == UIForceTouchCapability.available) {
+            registerForPreviewing(with: self, sourceView: view)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -97,6 +105,22 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent
         component: Int) -> String? {
         return ViewController.pickerValues[component][row]
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let popView = segue.destination as? InfoPopViewController {
+            popView.coinLabel.text = getSelectedCrypto()
+        }
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        let popView = storyboard?.instantiateViewController(withIdentifier: "popView") as! InfoPopViewController
+        popView.currentCoin = getSelectedCrypto()
+        return popView
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        // No Long Pop
     }
     
     static func printReponse(data: Data?) {
