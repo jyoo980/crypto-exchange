@@ -12,6 +12,7 @@ import Charts
 class GraphDataCache {
     
     static let shared = GraphDataCache()
+    
     private var cache : [String:LineChartDataSet]
     
     private init() {
