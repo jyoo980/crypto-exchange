@@ -55,7 +55,7 @@ class InfoPopViewRequest {
     fileprivate func parseHourChange(dict: NSDictionary??) -> String {
         let hourChange = dict??.value(forKey: "percent_change_1h") as! String
         if hourChange != "" {
-            return "Hour: " + hourChange + "%"
+            return "Hour: " + addPcntSymbol(changeInRate: hourChange)
         } else {
             return NO_DATA
         }
@@ -64,7 +64,7 @@ class InfoPopViewRequest {
     fileprivate func parseDayChange(dict: NSDictionary??) -> String {
         let dayChange = dict??.value(forKey: "percent_change_24h") as! String
         if dayChange != "" {
-            return "Day: " + dayChange + "%"
+            return "Day: " + addPcntSymbol(changeInRate: dayChange)
         } else {
             return NO_DATA
         }
@@ -73,10 +73,20 @@ class InfoPopViewRequest {
     fileprivate func parseWeekChange(dict: NSDictionary??) -> String {
         let weekChange = dict??.value(forKey: "percent_change_7d") as! String
         if weekChange != "" {
-            return "Week: " + weekChange + "%"
+            return "Week: " + addPcntSymbol(changeInRate: weekChange)
         } else {
             return NO_DATA
         }
-    }    
+    }
+    
+    fileprivate func addPcntSymbol(changeInRate: String) -> String {
+        var finalRateString = changeInRate
+        if finalRateString.contains("-") {
+            finalRateString = changeInRate + "%" + " ↓"
+        } else {
+            finalRateString = changeInRate + "%" + " ↑"
+        }
+        return finalRateString
+    }
     
 }

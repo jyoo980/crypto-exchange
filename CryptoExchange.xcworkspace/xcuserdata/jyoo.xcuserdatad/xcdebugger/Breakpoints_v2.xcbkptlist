@@ -778,7 +778,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/InfoPopViewRequest.swift"
-            timestampString = "541202452.676512"
+            timestampString = "541208107.438921"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
@@ -794,7 +794,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/InfoPopViewRequest.swift"
-            timestampString = "541202452.676968"
+            timestampString = "541208107.439588"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
@@ -810,7 +810,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/InfoPopViewRequest.swift"
-            timestampString = "541202452.677296"
+            timestampString = "541208107.440092"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "20"
@@ -858,7 +858,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/InfoPopViewRequest.swift"
-            timestampString = "541202452.677705"
+            timestampString = "541208107.440716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "25"
@@ -874,12 +874,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CryptoExchange/Model/InfoPopViewRequest.swift"
-            timestampString = "541202452.677973"
+            timestampString = "541208107.441291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
             endingLineNumber = "45"
             landmarkName = "parseResponse(responseDict:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CryptoExchange/Model/InfoPopViewRequest.swift"
+            timestampString = "541208107.441957"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "addPcntSymbol(changeInRate:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CryptoExchange/Model/InfoPopViewRequest.swift"
+            timestampString = "541208107.44232"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "addPcntSymbol(changeInRate:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
