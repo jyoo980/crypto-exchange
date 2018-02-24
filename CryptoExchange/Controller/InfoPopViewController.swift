@@ -21,6 +21,7 @@ class InfoPopViewController: UIViewController {
     
     override func viewDidLoad() {
         self.coinLabel.text = currentCoin
+        setInfoPeekData(cryptoCurrency: currentCoin, realCurrency: realCurrency)
     }
     
     fileprivate func setInfoPeekData(cryptoCurrency: String, realCurrency: String) {
@@ -28,20 +29,26 @@ class InfoPopViewController: UIViewController {
         popViewRequest.getReponseData(crypto: currentCoin, country: realCurrency) { (result) in
             self.sethourChangeLabel(hourDiff: result["hourChange"]!)
             self.setvolumeLabel(volume: result["volume"]!)
-            self.settimeStampLabel(timeStamp: result["timeStamp"]!)
+//            self.settimeStampLabel(timeStamp: result["timeStamp"]!)
         }
     }
     
     fileprivate func sethourChangeLabel(hourDiff: String) {
-        // TODO
+        DispatchQueue.main.async {
+            self.hourChangeLabel.text = hourDiff
+        }
     }
     
     fileprivate func setvolumeLabel(volume: String) {
-        // TODO
+        DispatchQueue.main.async {
+            self.volumeLabel.text = volume
+        }
     }
     
     fileprivate func settimeStampLabel(timeStamp: String) {
-        // TODO
+        DispatchQueue.main.async {
+            self.timeStampLabel.text = timeStamp
+        }
     }
     
 }

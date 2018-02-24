@@ -12,6 +12,7 @@ class InfoPopViewRequest {
     
     private let request = "https://api.cryptonator.com/api/ticker/{CRYPTO}-{REAL}"
     private let REQUEST_ERROR = ["REQUEST_ERROR":"ERROR"]
+    private let NO_DATA = "No data"
     
     func getReponseData(crypto: String, country: String, completionHandler: @escaping (_ result:[String:String]) ->()) {
         let session = URLSession.shared
@@ -22,9 +23,9 @@ class InfoPopViewRequest {
             if let data = data {
                 let responseDict = dataToDict(data: data)
                 if responseDict??["error"] != nil {
-                    completionHandler(self.REQUEST_ERROR)
-                } else {
                     completionHandler(self.parseResponse(responseDict: responseDict))
+                } else {
+                    completionHandler(self.REQUEST_ERROR)
                 }
             }
         }
@@ -38,14 +39,31 @@ class InfoPopViewRequest {
     }
     
     fileprivate func parseResponse(responseDict: NSDictionary??) -> [String:String] {
-        let unixTime = responseDict!!["timestamp"]
-        let dataDict = responseDict!!["ticker"]
-        return [:]
+        var parsedData = [String:String]()
+        let tickerDict = responseDict??.value(forKey: "ticker") as! NSDictionary
+        let hourChange = getHourChange(dict: tickerDict)
+        let volume = getVolume(dict: tickerDict)
+        parsedData["hourChange"] = hourChange
+        parsedData["volume"] = volume
+        return parsedData
     }
     
+    fileprivate func getHourChange(dict: NSDictionary??) -> String {
+        let hourChange = dict??.value(forKey: "change") as! String
+        if hourChange != "" {
+            return hourChange
+        } else {
+            return NO_DATA
+        }
+    }
     
-    
-    
-    
+    fileprivate func getVolume(dict: NSDictionary??) -> String {
+        let volume = dict??.value(forKey: "volume") as! String
+        if volume != "" {
+            return volume
+        } else {
+            return NO_DATA
+        }
+    }    
     
 }

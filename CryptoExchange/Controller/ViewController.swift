@@ -27,13 +27,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         cryptoPicker.delegate = self
         cryptoPicker.dataSource = self
         self.graphView.initChart(chart: self.chartView)
-        if self.conversionText.text != defaultMessage {
-            self.displayDefault()
-        }
+        displayDefaultText()
     }
     
-    func displayDefault() {
-        self.conversionText.text = defaultMessage
+    fileprivate func displayDefaultText() {
+        if self.conversionText.text != defaultMessage {
+            self.conversionText.text = defaultMessage
+        }
     }
     
     func enableForceTouch() {
