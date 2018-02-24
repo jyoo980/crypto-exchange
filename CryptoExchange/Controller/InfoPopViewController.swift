@@ -12,26 +12,12 @@ import UIKit
 class InfoPopViewController: UIViewController {
     
     @IBOutlet weak var coinLabel: UILabel!
-    @IBOutlet weak var cadLabel: UILabel!
-    @IBOutlet weak var eurLabel: UILabel!
-    @IBOutlet weak var poundLabel: UILabel!
-    @IBOutlet weak var yenLabel: UILabel!
-    @IBOutlet weak var usdLabel: UILabel!
-    
-    var currentCoin = ""
-    var cdn = ""
-    var eur = ""
-    var yen = ""
-    var usd = ""
-    var pound = ""
+    @IBOutlet weak var hourChangeLabel: UILabel!
+    @IBOutlet weak var volumeLabel: UILabel!
+    @IBOutlet weak var timeStampLabel: UILabel!
     
     override func viewDidLoad() {
-        coinLabel.text = "1 " + currentCoin
-        cadLabel.text = cdn
-        eurLabel.text = eur
-        poundLabel.text = pound
-        yenLabel.text = yen
-        usdLabel.text = usd
+        // TODO
     }
     
 }
