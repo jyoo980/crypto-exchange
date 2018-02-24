@@ -13,8 +13,8 @@ class InfoPopViewController: UIViewController {
     
     @IBOutlet weak var coinLabel: UILabel!
     @IBOutlet weak var hourChangeLabel: UILabel!
-    @IBOutlet weak var volumeLabel: UILabel!
-    @IBOutlet weak var timeStampLabel: UILabel!
+    @IBOutlet weak var dayChangeLabel: UILabel!
+    @IBOutlet weak var weekChangeLabel: UILabel!
     
     var currentCoin = ""
     var realCurrency = ""
@@ -27,28 +27,20 @@ class InfoPopViewController: UIViewController {
     fileprivate func setInfoPeekData(cryptoCurrency: String, realCurrency: String) {
         let popViewRequest = InfoPopViewRequest()
         popViewRequest.getReponseData(crypto: currentCoin, country: realCurrency) { (result) in
-            self.sethourChangeLabel(hourDiff: result["hourChange"]!)
-            self.setvolumeLabel(volume: result["volume"]!)
-//            self.settimeStampLabel(timeStamp: result["timeStamp"]!)
+            self.setInfoLabels(data: result)
         }
     }
     
-    fileprivate func sethourChangeLabel(hourDiff: String) {
+    fileprivate func setInfoLabels(data: [String:String]) {
         DispatchQueue.main.async {
-            self.hourChangeLabel.text = hourDiff
+            self.hourChangeLabel.text = data["hourChange"]
+            self.dayChangeLabel.text = data["dayChange"]
+            self.weekChangeLabel.text = data["weekChange"]
         }
     }
-    
-    fileprivate func setvolumeLabel(volume: String) {
-        DispatchQueue.main.async {
-            self.volumeLabel.text = volume
-        }
-    }
-    
-    fileprivate func settimeStampLabel(timeStamp: String) {
-        DispatchQueue.main.async {
-            self.timeStampLabel.text = timeStamp
-        }
-    }
-    
+
 }
+        
+
+
+

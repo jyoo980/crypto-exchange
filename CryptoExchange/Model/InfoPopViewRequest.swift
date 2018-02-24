@@ -10,7 +10,8 @@ import Foundation
 
 class InfoPopViewRequest {
     
-    private let request = "https://api.cryptonator.com/api/ticker/{CRYPTO}-{REAL}"
+    private let request = "https://api.coinmarketcap.com/v1/ticker/{CRYPTO}/?convert={REAL}"
+    private let cryptoDict = ["BCH":"bitcoin-cash", "BTC":"bitcoin", "BTG":"bitcoin-gold", "DOGE":"dogecoin", "ETH":"ethereum", "LTC":"litecoin", "XRP":"ripple"]
     private let REQUEST_ERROR = ["REQUEST_ERROR":"ERROR"]
     private let NO_DATA = "No data"
     
@@ -21,8 +22,8 @@ class InfoPopViewRequest {
         let dataTask = session.dataTask(with: requestURL!) { (data, response, error) in
             
             if let data = data {
-                let responseDict = dataToDict(data: data)
-                if responseDict??["error"] != nil {
+                let responseDict = dataToJSONArray(data: data)
+                if responseDict != nil {
                     completionHandler(self.parseResponse(responseDict: responseDict))
                 } else {
                     completionHandler(self.REQUEST_ERROR)
@@ -33,23 +34,21 @@ class InfoPopViewRequest {
     }
     
     fileprivate func generateRequestURL(cryptoCurrency: String, realCurrency: String) -> URL? {
-        var requestURL = self.request.replacingOccurrences(of: "{CRYPTO}", with: cryptoCurrency)
+        let coin = self.cryptoDict[cryptoCurrency]
+        var requestURL = self.request.replacingOccurrences(of: "{CRYPTO}", with: coin!)
         requestURL = requestURL.replacingOccurrences(of: "{REAL}", with: realCurrency)
         return URL(string: requestURL)
     }
     
-    fileprivate func parseResponse(responseDict: NSDictionary??) -> [String:String] {
+    fileprivate func parseResponse(responseDict: NSArray??) -> [String:String] {
         var parsedData = [String:String]()
-        let tickerDict = responseDict??.value(forKey: "ticker") as! NSDictionary
-        let hourChange = getHourChange(dict: tickerDict)
-        let volume = getVolume(dict: tickerDict)
-        parsedData["hourChange"] = hourChange
-        parsedData["volume"] = volume
+        let tickerDict = responseDict!![0] as! NSDictionary
+        
         return parsedData
     }
     
     fileprivate func getHourChange(dict: NSDictionary??) -> String {
-        let hourChange = dict??.value(forKey: "change") as! String
+        let hourChange = dict??.value(forKey: "percent_change_1h") as! String
         if hourChange != "" {
             return hourChange
         } else {
@@ -57,13 +56,13 @@ class InfoPopViewRequest {
         }
     }
     
-    fileprivate func getVolume(dict: NSDictionary??) -> String {
-        let volume = dict??.value(forKey: "volume") as! String
-        if volume != "" {
-            return volume
+    fileprivate func getDayChange(dict: NSDictionary??) -> String {
+        let dayChange = dict??.value(forKey: "percent_change_24h") as! String
+        if dayChange != "" {
+            return dayChange
         } else {
             return NO_DATA
         }
-    }    
+    }
     
 }
