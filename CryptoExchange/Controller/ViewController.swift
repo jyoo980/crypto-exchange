@@ -115,14 +115,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         let selectedCrypto = getSelectedCrypto()
-        let coinRequest = CoinExchangeRequest()
+        let selectedReal = getSelectedReal()
         let popView = storyboard?.instantiateViewController(withIdentifier: "popView") as! InfoPopViewController
         popView.currentCoin = selectedCrypto
-        popView.cdn = coinRequest.fetchFromCache(crypto: selectedCrypto, country: "CAD")
-        popView.eur = coinRequest.fetchFromCache(crypto: selectedCrypto, country: "EUR")
-        popView.pound = coinRequest.fetchFromCache(crypto: selectedCrypto, country: "GBP")
-        popView.yen = coinRequest.fetchFromCache(crypto: selectedCrypto, country: "JPY")
-        popView.usd = coinRequest.fetchFromCache(crypto: selectedCrypto, country: "USD")
+        popView.realCurrency = selectedReal
         return popView
     }
     
