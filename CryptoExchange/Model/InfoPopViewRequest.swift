@@ -42,27 +42,41 @@ class InfoPopViewRequest {
     
     fileprivate func parseResponse(responseDict: NSArray??) -> [String:String] {
         var parsedData = [String:String]()
-        let tickerDict = responseDict!![0] as! NSDictionary
-        
+        let coinDict = responseDict!![0] as! NSDictionary
+        let hourChange = parseHourChange(dict: coinDict)
+        let dayChange = parseDayChange(dict: coinDict)
+        let weekChange = parseWeekChange(dict: coinDict)
+        parsedData["hourChange"] = hourChange
+        parsedData["dayChange"] = dayChange
+        parsedData["weekChange"] = weekChange
         return parsedData
     }
     
-    fileprivate func getHourChange(dict: NSDictionary??) -> String {
+    fileprivate func parseHourChange(dict: NSDictionary??) -> String {
         let hourChange = dict??.value(forKey: "percent_change_1h") as! String
         if hourChange != "" {
-            return hourChange
+            return "Hour: " + hourChange + "%"
         } else {
             return NO_DATA
         }
     }
     
-    fileprivate func getDayChange(dict: NSDictionary??) -> String {
+    fileprivate func parseDayChange(dict: NSDictionary??) -> String {
         let dayChange = dict??.value(forKey: "percent_change_24h") as! String
         if dayChange != "" {
-            return dayChange
+            return "Day: " + dayChange + "%"
         } else {
             return NO_DATA
         }
     }
+    
+    fileprivate func parseWeekChange(dict: NSDictionary??) -> String {
+        let weekChange = dict??.value(forKey: "percent_change_7d") as! String
+        if weekChange != "" {
+            return "Week: " + weekChange + "%"
+        } else {
+            return NO_DATA
+        }
+    }    
     
 }
