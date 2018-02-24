@@ -11,3 +11,7 @@ import Foundation
 func dataToDict(data: Data?) -> NSDictionary?? {
     return try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
 }
+
+func dataToJSONArray(data: Data?) -> NSArray?? {
+    return try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSArray
+}

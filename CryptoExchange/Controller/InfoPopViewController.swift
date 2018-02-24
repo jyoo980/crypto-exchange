@@ -12,26 +12,35 @@ import UIKit
 class InfoPopViewController: UIViewController {
     
     @IBOutlet weak var coinLabel: UILabel!
-    @IBOutlet weak var cadLabel: UILabel!
-    @IBOutlet weak var eurLabel: UILabel!
-    @IBOutlet weak var poundLabel: UILabel!
-    @IBOutlet weak var yenLabel: UILabel!
-    @IBOutlet weak var usdLabel: UILabel!
+    @IBOutlet weak var hourChangeLabel: UILabel!
+    @IBOutlet weak var dayChangeLabel: UILabel!
+    @IBOutlet weak var weekChangeLabel: UILabel!
     
     var currentCoin = ""
-    var cdn = ""
-    var eur = ""
-    var yen = ""
-    var usd = ""
-    var pound = ""
+    var realCurrency = ""
     
     override func viewDidLoad() {
-        coinLabel.text = "1 " + currentCoin
-        cadLabel.text = cdn
-        eurLabel.text = eur
-        poundLabel.text = pound
-        yenLabel.text = yen
-        usdLabel.text = usd
+        self.coinLabel.text = currentCoin
+        setInfoPeekData(cryptoCurrency: currentCoin, realCurrency: realCurrency)
     }
     
+    fileprivate func setInfoPeekData(cryptoCurrency: String, realCurrency: String) {
+        let popViewRequest = InfoPopViewRequest()
+        popViewRequest.getReponseData(crypto: currentCoin, country: realCurrency) { (result) in
+            self.setInfoLabels(data: result)
+        }
+    }
+    
+    fileprivate func setInfoLabels(data: [String:String]) {
+        DispatchQueue.main.async {
+            self.hourChangeLabel.text = data["hourChange"]
+            self.dayChangeLabel.text = data["dayChange"]
+            self.weekChangeLabel.text = data["weekChange"]
+        }
+    }
+
 }
+        
+
+
+
