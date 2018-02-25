@@ -40,7 +40,6 @@ class CoinGraphRequest {
         data.addDataSet(dataSet)
         chart.data = data
         chart.animate(xAxisDuration: 1)
-        chart.animate(yAxisDuration: 1)
     }
     
     fileprivate func dispatchRequest(_ crypto: String, _ realCurrency: String, _ chart: LineChartView!) {
