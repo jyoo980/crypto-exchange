@@ -26,13 +26,13 @@ class ExchangeRateCache {
     func fetch(crypto: String, real: String) -> Double {
         let rateArray = self.cache[crypto]
         if rateArray != nil {
-            return attemptFetch(rateArray, real)
+            return nestedFetch(rateArray, real)
         } else {
             return CACHE_MISS
         }
     }
     
-    fileprivate func attemptFetch(_ rateArray: [[String : Double]]?, _ real: String) -> Double {
+    fileprivate func nestedFetch(_ rateArray: [[String : Double]]?, _ real: String) -> Double {
         for rate in rateArray! {
             let hit = rate[real]
             if hit != nil {

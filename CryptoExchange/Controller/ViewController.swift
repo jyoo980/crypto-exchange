@@ -19,7 +19,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     static let pickerValues = [["BCH","BTC","BTG","DOGE","ETH", "LTC", "XRP"], ["CAD", "EUR","GBP", "JPY", "USD"]]
     private let graphView = CryptoGraphView()
     private let defaultMessage = "Select Below"
-    private var prevSelectedCoin = ""
+    private var prevSelectedCrypto = ""
+    private var prevSelectedReal = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +51,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         let selectedCrypto = getSelectedCrypto()
         let selectedReal = getSelectedReal()
         updateConversionRateCheckCache(crypto: selectedCrypto, realCurrency: selectedReal)
-        getExchangeRateGraph(coin: selectedCrypto)
+        getExchangeRateGraph(coin: selectedCrypto, realCurrency: selectedReal)
     }
     
     func getSelectedCrypto() -> String {
@@ -63,11 +64,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return ViewController.pickerValues[1][currencyChoiceIndex]
     }
     
-    fileprivate func getExchangeRateGraph(coin: String) {
-        if (self.prevSelectedCoin != coin) {
-            self.prevSelectedCoin = coin
+    fileprivate func getExchangeRateGraph(coin: String, realCurrency: String) {
+        if (prevSelectedCrypto != getSelectedCrypto() || prevSelectedReal != getSelectedReal()) {
             let coinGraphRequest = CoinGraphRequest()
-            coinGraphRequest.getUpdatedChartData(crypto: coin, chartView: self.chartView)
+            prevSelectedCrypto = coin
+            prevSelectedReal = realCurrency
+            coinGraphRequest.getUpdatedChartData(crypto: coin, real: realCurrency, chartView: self.chartView)
         }
     }
     

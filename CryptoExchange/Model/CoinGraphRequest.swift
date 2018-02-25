@@ -11,16 +11,28 @@ import Charts
 
 class CoinGraphRequest {
     
-    private var graphRequest = "https://coinbin.org/{CRYPTO}/history"
-    private let DAYS_IN_YEAR = 365
+    private var graphRequest = "https://min-api.cryptocompare.com/data/histohour?fsym={CRYPTO}&tsym={REAL}&limit={LIMIT}&toTs={TIME}"
+    private let NUM_DATAPOINTS = "60"
     
-    func getUpdatedChartData(crypto: String, chartView: LineChartView!) {
-        self.constructDataPoints(crypto: crypto, chart: chartView)        
+    func getUpdatedChartData(crypto: String, real: String, chartView: LineChartView!) {
+        self.constructDataPoints(crypto: crypto, real: real, chart: chartView)
     }
     
-    fileprivate func generateRequestURL(cryptoCurrency: String) -> URL? {
-        let requestURL = self.graphRequest.replacingOccurrences(of: "{CRYPTO}", with: cryptoCurrency)
+    fileprivate func generateRequestURL(cryptoCurrency: String, realCurrency: String) -> URL? {
+        let currentUNIXTime = unixTime()
+        var requestURL = self.graphRequest.replacingOccurrences(of: "{CRYPTO}", with: cryptoCurrency)
+        requestURL = requestURL.replacingOccurrences(of: "{REAL}", with: realCurrency)
+        requestURL = requestURL.replacingOccurrences(of: "{LIMIT}", with: NUM_DATAPOINTS)
+        requestURL = requestURL.replacingOccurrences(of: "{TIME}", with: currentUNIXTime)
         return URL(string: requestURL)
+    }
+    
+    fileprivate func unixTime() -> String {
+        var unixTime = NSDate().timeIntervalSince1970.description
+        if let dotRange = unixTime.range(of: ".") {
+            unixTime.removeSubrange(dotRange.lowerBound..<unixTime.endIndex)
+        }
+        return unixTime
     }
     
     fileprivate func setGraph(_ dataSet: LineChartDataSet, _ chart: LineChartView!) {
@@ -31,34 +43,34 @@ class CoinGraphRequest {
         chart.animate(yAxisDuration: 1)
     }
     
-    fileprivate func dispatchRequest(_ crypto: String, _ chart: LineChartView!) {
-        getHistory(crypto: crypto) { (result) -> () in
+    fileprivate func dispatchRequest(_ crypto: String, _ realCurrency: String, _ chart: LineChartView!) {
+        getHistory(crypto: crypto, real: realCurrency) { (result) -> () in
             let dataSet = self.constructDataSet(history: result)
-            GraphDataCache.shared.set(crypto: crypto, data: dataSet)
+            GraphDataCache.shared.set(cryptoCurrency: crypto, realCurrency: realCurrency, data: dataSet)
             self.setGraph(dataSet, chart)
         }
     }
     
-    fileprivate func constructDataPoints(crypto: String, chart: LineChartView!) {
+    fileprivate func constructDataPoints(crypto: String, real: String, chart: LineChartView!) {
         let dataCache = GraphDataCache.shared
-        if (dataCache.dataSetPresent(crypto: crypto)) {
-            let dataSet = dataCache.fetch(crypto: crypto)
+        if dataCache.isDataSetPresent(cryptoCurrency: crypto, realCurrency: real) {
+            let dataSet = dataCache.fetch(cryptoCurrency: crypto, realCurrency: real)
             self.setGraph(dataSet, chart)
         } else {
-            dispatchRequest(crypto, chart)
+            dispatchRequest(crypto, real, chart)
         }
     }
     
-    fileprivate func getHistory(crypto: String, completionHandler: @escaping (_ result:NSArray) ->()) {
+    fileprivate func getHistory(crypto: String, real: String,  completionHandler: @escaping (_ result:NSArray) ->()) {
         let session = URLSession.shared
-        let queryURL = generateRequestURL(cryptoCurrency: crypto)
+        let queryURL = generateRequestURL(cryptoCurrency: crypto, realCurrency: real)
         
         let dataTask = session.dataTask(with: queryURL!) { (data, response, error) in
             
             if let data = data {
                 DispatchQueue.main.async {
                     let responseDict = dataToDict(data: data)
-                    completionHandler(responseDict??["history"] as! NSArray)
+                    completionHandler(responseDict??["Data"] as! NSArray)
                 }
             }
         }
@@ -66,28 +78,19 @@ class CoinGraphRequest {
     }
     
     fileprivate func constructDataSet(history: NSArray) -> LineChartDataSet {
-        let year = setMaxIter(array: history)
         var lineChartData = [ChartDataEntry]()
         
-        for d in 0...year {
-            lineChartData.append(addDataPoint(history: history, day: d, year: year))
+        for d in 0...Int(NUM_DATAPOINTS)! {
+            lineChartData.append(addDataPoint(history: history, day: d, year: Int(NUM_DATAPOINTS)!))
         }
         
         let dataSet = generateLineChartDataSet(line: lineChartData, label: "")
         return dataSet
     }
     
-    fileprivate func setMaxIter(array: NSArray) -> Int {
-        if (array.count < DAYS_IN_YEAR) {
-            return array.count - 1
-        } else {
-            return DAYS_IN_YEAR
-        }
-    }
-    
     fileprivate func addDataPoint(history: NSArray, day: Int, year: Int) -> ChartDataEntry {
         let coinEntry = history[year - day] as? NSDictionary
-        let yVal = coinEntry?.value(forKey: "value")
+        let yVal = coinEntry?.value(forKey: "high")
         return ChartDataEntry(x: Double(day), y: yVal as! Double)
     }
     
