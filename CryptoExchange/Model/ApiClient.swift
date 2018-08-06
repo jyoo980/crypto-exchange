@@ -11,6 +11,13 @@ import Foundation
 class ApiClient {
     
     private let ERROR_CODE = "500"
+    private let NUM_DATAPOINTS = "60"
+    
+    func getExchangeRateHistory(crypto: String, currency: String, callBack: @escaping (_ result:NSArray) -> ()) {
+        historicalRateRequest(crypto: crypto, currency: currency) { result -> () in
+            callBack(result)
+        }
+    }
     
     func getCryptoExchangeRate(crypto: String, currency: String, callBack: @escaping (_ result:String) -> ()) {
         exchangeRateRequest(crypto: crypto, currency: currency) { result -> () in
@@ -22,7 +29,7 @@ class ApiClient {
         let requestUrl = coinExchangeRateURL(cryto: crypto, currency: currency)
         let session = URLSession.shared
         
-        let dataTask = session.dataTask(with: requestUrl) { (data, response, error) in
+        let dataTask = session.dataTask(with: requestUrl) { (data, _, _) in
             
             if let data = data {
                 let responseDict = dataToDict(data: data)
@@ -36,11 +43,36 @@ class ApiClient {
         dataTask.resume()
     }
     
+    private func historicalRateRequest(crypto: String, currency: String, callBack:  @escaping (_ result:NSArray) -> ()) {
+        let requestUrl = historicalExchangeRateURL(crypto: crypto, currency: currency)
+        let session = URLSession.shared
+        
+        let dataTask = session.dataTask(with: requestUrl) { (data, _, _) in
+            if let data = data {
+                DispatchQueue.main.async {
+                    let responseDict = dataToDict(data: data)
+                    callBack(responseDict??["Data"] as! NSArray)
+                }
+            }
+        }
+        dataTask.resume()
+    }
+    
     private func coinExchangeRateURL(cryto: String, currency: String) -> URL {
-        var request = "https://min-api.cryptocompare.com/data/price?fsym={CRYPTO}&tsyms={CURRENCIES}"
-        request = request.replacingOccurrences(of: "{CRYPTO}", with: cryto)
-        request = request.replacingOccurrences(of: "{CURRENCIES}", with: currency)
-        return URL(string: request)!
+        var url = "https://min-api.cryptocompare.com/data/price?fsym={CRYPTO}&tsyms={CURRENCIES}"
+        url = url.replacingOccurrences(of: "{CRYPTO}", with: cryto)
+        url = url.replacingOccurrences(of: "{CURRENCIES}", with: currency)
+        return URL(string: url)!
+    }
+    
+    private func historicalExchangeRateURL(crypto: String, currency: String) -> URL {
+        let currentTime = unixTime()
+        var url = "https://min-api.cryptocompare.com/data/histohour?fsym={CRYPTO}&tsym={REAL}&limit={LIMIT}&toTs={TIME}"
+        url = url.replacingOccurrences(of: "{CRYPTO}", with: crypto)
+        url = url.replacingOccurrences(of: "{REAL}", with: currency)
+        url = url.replacingOccurrences(of: "{LIMIT}", with: NUM_DATAPOINTS)
+        url = url.replacingOccurrences(of: "{TIME}", with: currentTime)
+        return URL(string: url)!
     }
     
     private func parseConversionRate(responseDict: NSDictionary??, currency: String, country: String) -> String {
