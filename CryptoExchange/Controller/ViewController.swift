@@ -18,6 +18,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     static let pickerValues = [["BCH","BTC","BTG","DOGE","ETH", "LTC", "XRP"], ["CAD", "EUR","GBP", "JPY", "USD"]]
     private let graphView = CryptoGraphView()
+    private let apiClient = ApiClient()
     private let defaultMessage = "Select Below"
     private var prevSelectedCrypto = ""
     private var prevSelectedReal = ""
@@ -31,7 +32,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         displayDefaultText()
     }
     
-    fileprivate func displayDefaultText() {
+    private func displayDefaultText() {
         if self.conversionText.text != defaultMessage {
             self.conversionText.text = defaultMessage
         }
@@ -64,7 +65,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         return ViewController.pickerValues[1][currencyChoiceIndex]
     }
     
-    fileprivate func getExchangeRateGraph(coin: String, realCurrency: String) {
+    private func getExchangeRateGraph(coin: String, realCurrency: String) {
         if (prevSelectedCrypto != getSelectedCrypto() || prevSelectedReal != getSelectedReal()) {
             let coinGraphRequest = CoinGraphRequest()
             prevSelectedCrypto = coin
@@ -74,9 +75,14 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func updateConversionRate(crypto: String, realCurrency: String) {
-        let coinExchangeRequest = CoinExchangeRequest()
-        coinExchangeRequest.getConversionRate(crypto: crypto, country: realCurrency) { (result) -> () in
-            self.setExchangeRateLabel(rate: result)
+        let coinExchange = CoinExchangeRequest()
+        let exchangeRate = coinExchange.fetchFromCache(crypto: crypto, country: realCurrency)
+        if (exchangeRate != coinExchange.CACHE_MISS) {
+            self.setExchangeRateLabel(rate: exchangeRate)
+        } else {
+            apiClient.getCryptoExchangeRate(crypto: crypto, currency: realCurrency) { (result) -> () in
+                self.setExchangeRateLabel(rate: result)
+            }
         }
     }
     
