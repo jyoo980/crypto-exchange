@@ -12,6 +12,7 @@ class ApiClient {
     
     private let ERROR_CODE = "500"
     private let NUM_DATAPOINTS = "60"
+    private let cryptoDict = ["BCH":"bitcoin-cash", "BTC":"bitcoin", "BTG":"bitcoin-gold", "DOGE":"dogecoin", "ETH":"ethereum", "LTC":"litecoin", "XRP":"ripple"]
     
     func getExchangeRateHistory(crypto: String, currency: String, callBack: @escaping (_ result:NSArray) -> ()) {
         historicalRateRequest(crypto: crypto, currency: currency) { result -> () in
@@ -21,6 +22,12 @@ class ApiClient {
     
     func getCryptoExchangeRate(crypto: String, currency: String, callBack: @escaping (_ result:String) -> ()) {
         exchangeRateRequest(crypto: crypto, currency: currency) { result -> () in
+            callBack(result)
+        }
+    }
+    
+    func getPopViewInfo(crypto: String, currency: String, callBack: @escaping (_ result:[String:String]) -> ()) {
+        popViewRequest(crypto: crypto, currency: currency) { result -> () in
             callBack(result)
         }
     }
@@ -58,6 +65,21 @@ class ApiClient {
         dataTask.resume()
     }
     
+    private func popViewRequest(crypto: String, currency: String, callBack: @escaping (_ result:[String:String]) ->()) {
+        let requestUrl = infoViewURL(crypto: crypto, currency: currency)
+        let session = URLSession.shared
+        
+        let dataTask = session.dataTask(with: requestUrl) { (data, _, _) in
+            let responseDict = dataToJSONArray(data: data)
+            if responseDict != nil {
+                callBack(parseResponse(responseDict: responseDict))
+            } else {
+                callBack([:])
+            }
+        }
+        dataTask.resume()
+    }
+    
     private func coinExchangeRateURL(cryto: String, currency: String) -> URL {
         var url = "https://min-api.cryptocompare.com/data/price?fsym={CRYPTO}&tsyms={CURRENCIES}"
         url = url.replacingOccurrences(of: "{CRYPTO}", with: cryto)
@@ -72,6 +94,13 @@ class ApiClient {
         url = url.replacingOccurrences(of: "{REAL}", with: currency)
         url = url.replacingOccurrences(of: "{LIMIT}", with: NUM_DATAPOINTS)
         url = url.replacingOccurrences(of: "{TIME}", with: currentTime)
+        return URL(string: url)!
+    }
+    
+    private func infoViewURL(crypto: String, currency: String) -> URL {
+        var url = "https://api.coinmarketcap.com/v1/ticker/{CRYPTO}/?convert={REAL}"
+        url = url.replacingOccurrences(of: "{CRYPTO}", with: self.cryptoDict[crypto]!)
+        url = url.replacingOccurrences(of: "{REAL}", with: currency)
         return URL(string: url)!
     }
     

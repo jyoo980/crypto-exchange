@@ -37,7 +37,6 @@ class CoinGraphRequest {
         let dataCache = GraphDataCache.shared
         if dataCache.isDataSetPresent(cryptoCurrency: crypto, realCurrency: real) {
             let dataSet = dataCache.fetch(cryptoCurrency: crypto, realCurrency: real)
-            print("using cache")
             self.setGraph(dataSet, chart)
         } else {
             dispatchRequest(crypto, real, chart)

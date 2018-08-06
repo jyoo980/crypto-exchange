@@ -16,6 +16,8 @@ class InfoPopViewController: UIViewController {
     @IBOutlet weak var dayChangeLabel: UILabel!
     @IBOutlet weak var weekChangeLabel: UILabel!
     
+    private let apiClient = ApiClient()
+    
     var currentCoin = ""
     var realCurrency = ""
     
@@ -25,8 +27,7 @@ class InfoPopViewController: UIViewController {
     }
     
     fileprivate func setInfoPeekData(cryptoCurrency: String, realCurrency: String) {
-        let popViewRequest = InfoPopViewRequest()
-        popViewRequest.getReponseData(crypto: currentCoin, country: realCurrency) { (result) in
+        apiClient.getPopViewInfo(crypto: cryptoCurrency, currency: realCurrency) { result -> () in
             self.setInfoLabels(data: result)
         }
     }
