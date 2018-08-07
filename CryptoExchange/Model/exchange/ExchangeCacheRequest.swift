@@ -10,8 +10,7 @@ import Foundation
 
 class ExchangeCacheRequest {
     
-    private let request = "https://min-api.cryptocompare.com/data/price?fsym={CRYPTO}&tsyms={CURRENCIES}"
-    private let cacheRequestError = "CACHE ERROR"
+    private let apiClient = ApiClient()
     
     func populateCache() {
         let cryptoCurrencies = ViewController.pickerValues[0]
@@ -20,34 +19,18 @@ class ExchangeCacheRequest {
         }
     }
     
-    fileprivate func getCacheData(crypto: String) {
-        let session = URLSession.shared
-        let requestURL = generateCacheURL(crypto: crypto)
-        
-        let dataTask = session.dataTask(with: requestURL!) { (data, response, error) in
-            
-            if let data = data {
-                let responseDict = dataToDict(data: data)
-                if responseDict??["error"] == nil {
-                    self.setCache(crypto: crypto, rateDict: responseDict)
-                }
-            }
-        }
-        dataTask.resume()
-    }
-    
-    fileprivate func generateCacheURL(crypto: String) -> URL? {
+    private func getCacheData(crypto: String) {
         let currencyList = self.currencyList()
-        var requestURL = self.request.replacingOccurrences(of: "{CRYPTO}", with: crypto)
-        requestURL = requestURL.replacingOccurrences(of: "{CURRENCIES}", with: currencyList)
-        return URL(string: requestURL)
+        apiClient.getCachedRates(crypto: crypto, currencies: currencyList) { result -> () in
+            self.setCache(crypto: crypto, rateDict: result)
+        }
     }
     
-    fileprivate func currencyList() -> String {
+    private func currencyList() -> String {
         return ViewController.pickerValues[1].joined(separator: ",")
     }
     
-    fileprivate func setCache(crypto: String, rateDict: NSDictionary??) {
+    private func setCache(crypto: String, rateDict: NSDictionary??) {
         let currencies = ViewController.pickerValues[1]
         for currency in currencies {
             let exchRate = sanitizeRate(rate: rateDict??.value(forKey: currency) as! NSNumber)
@@ -55,7 +38,7 @@ class ExchangeCacheRequest {
         }
     }
     
-    fileprivate func sanitizeRate(rate: NSNumber) -> Double {
+    private func sanitizeRate(rate: NSNumber) -> Double {
         return rate.doubleValue
     }
     

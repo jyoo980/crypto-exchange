@@ -21,19 +21,19 @@ class CryptoGraphView {
         setRightAxis(chart: chart)
     }
     
-    fileprivate func setXAxis(chart: LineChartView!) {
+    private func setXAxis(chart: LineChartView!) {
         chart.xAxis.drawLabelsEnabled = false
         chart.xAxis.drawGridLinesEnabled = false
         chart.xAxis.drawAxisLineEnabled = false
     }
     
-    fileprivate func setLeftAxis(chart: LineChartView!) {
+    private func setLeftAxis(chart: LineChartView!) {
         chart.leftAxis.drawAxisLineEnabled = false
         chart.leftAxis.drawLabelsEnabled = false
         chart.leftAxis.drawGridLinesEnabled = false
     }
     
-    fileprivate func setRightAxis(chart: LineChartView!) {
+    private func setRightAxis(chart: LineChartView!) {
         chart.rightAxis.drawAxisLineEnabled = false
         chart.rightAxis.drawLabelsEnabled = false
         chart.rightAxis.drawGridLinesEnabled = false

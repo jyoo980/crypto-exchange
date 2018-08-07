@@ -32,6 +32,12 @@ class ApiClient {
         }
     }
     
+    func getCachedRates(crypto: String, currencies: String, callBack: @escaping (_ result:NSDictionary) -> ()) {
+        cachedRateRequest(crypto: crypto, currencies: currencies) { result -> () in
+            callBack(result)
+        }
+    }
+    
     private func exchangeRateRequest(crypto: String, currency: String, callBack: @escaping (_ result:String) ->()) {
         let requestUrl = coinExchangeRateURL(cryto: crypto, currency: currency)
         let session = URLSession.shared
@@ -75,6 +81,21 @@ class ApiClient {
                 callBack(parseResponse(responseDict: responseDict))
             } else {
                 callBack([:])
+            }
+        }
+        dataTask.resume()
+    }
+    
+    private func cachedRateRequest(crypto: String, currencies: String, callBack: @escaping (_ result:NSDictionary) -> ()) {
+        let requestUrl = coinExchangeRateURL(cryto: crypto, currency: currencies)
+        let session = URLSession.shared
+        
+        let dataTask = session.dataTask(with: requestUrl) { (data, _, _) in
+            if let data = data {
+                let responseDict = dataToDict(data: data)
+                if responseDict??["error"] == nil {
+                    callBack(responseDict!!)
+                }
             }
         }
         dataTask.resume()
