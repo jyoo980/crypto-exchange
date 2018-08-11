@@ -44,7 +44,7 @@ class GraphDataCache {
         }
     }
     
-    fileprivate func nestedFetch(crypoArray: [[String:LineChartDataSet]], realCurrency: String) -> LineChartDataSet {
+    private func nestedFetch(crypoArray: [[String:LineChartDataSet]], realCurrency: String) -> LineChartDataSet {
         for crypto in crypoArray {
             let hit = crypto[realCurrency]
             if hit != nil {
@@ -56,13 +56,13 @@ class GraphDataCache {
     
     func set(cryptoCurrency: String, realCurrency: String, data: LineChartDataSet) {
         let duple = [realCurrency : data]
-        
-        if self.cache[cryptoCurrency] != nil {
-            self.cache[cryptoCurrency]?.append(duple)
-        } else {
+        if !hasCryptoEntry(crypto: cryptoCurrency) {
             self.cache[cryptoCurrency] = []
-            self.cache[cryptoCurrency]?.append(duple)
         }
-        
+        self.cache[cryptoCurrency]?.append(duple)
+    }
+    
+    private func hasCryptoEntry(crypto: String) -> Bool {
+        return self.cache[crypto] != nil
     }
 }
