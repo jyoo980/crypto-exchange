@@ -11,8 +11,7 @@ import Foundation
 class ApiClient {
     
     private let ERROR_CODE = "500"
-    private let NUM_DATAPOINTS = "60"
-    private let cryptoDict = ["BCH":"bitcoin-cash", "BTC":"bitcoin", "BTG":"bitcoin-gold", "DOGE":"dogecoin", "ETH":"ethereum", "LTC":"litecoin", "XRP":"ripple"]
+    private let urlBuilder = UrlBuilder()
     
     func getExchangeRateHistory(crypto: String, currency: String, callBack: @escaping (_ result:NSArray) -> ()) {
         historicalRateRequest(crypto: crypto, currency: currency) { result -> () in
@@ -39,7 +38,7 @@ class ApiClient {
     }
     
     private func exchangeRateRequest(crypto: String, currency: String, callBack: @escaping (_ result:String) ->()) {
-        let requestUrl = coinExchangeRateURL(cryto: crypto, currency: currency)
+        let requestUrl = urlBuilder.coinExchangeRateURL(cryto: crypto, currency: currency)
         let session = URLSession.shared
         
         let dataTask = session.dataTask(with: requestUrl) { (data, _, _) in
@@ -57,7 +56,7 @@ class ApiClient {
     }
     
     private func historicalRateRequest(crypto: String, currency: String, callBack:  @escaping (_ result:NSArray) -> ()) {
-        let requestUrl = historicalExchangeRateURL(crypto: crypto, currency: currency)
+        let requestUrl = urlBuilder.historicalExchangeRateURL(crypto: crypto, currency: currency)
         let session = URLSession.shared
         
         let dataTask = session.dataTask(with: requestUrl) { (data, _, _) in
@@ -72,7 +71,7 @@ class ApiClient {
     }
     
     private func popViewRequest(crypto: String, currency: String, callBack: @escaping (_ result:[String:String]) ->()) {
-        let requestUrl = infoViewURL(crypto: crypto, currency: currency)
+        let requestUrl = urlBuilder.infoViewURL(crypto: crypto, currency: currency)
         let session = URLSession.shared
         
         let dataTask = session.dataTask(with: requestUrl) { (data, _, _) in
@@ -87,7 +86,7 @@ class ApiClient {
     }
     
     private func cachedRateRequest(crypto: String, currencies: String, callBack: @escaping (_ result:NSDictionary) -> ()) {
-        let requestUrl = coinExchangeRateURL(cryto: crypto, currency: currencies)
+        let requestUrl = urlBuilder.coinExchangeRateURL(cryto: crypto, currency: currencies)
         let session = URLSession.shared
         
         let dataTask = session.dataTask(with: requestUrl) { (data, _, _) in
@@ -99,30 +98,6 @@ class ApiClient {
             }
         }
         dataTask.resume()
-    }
-    
-    private func coinExchangeRateURL(cryto: String, currency: String) -> URL {
-        var url = "https://min-api.cryptocompare.com/data/price?fsym={CRYPTO}&tsyms={CURRENCIES}"
-        url = url.replacingOccurrences(of: "{CRYPTO}", with: cryto)
-        url = url.replacingOccurrences(of: "{CURRENCIES}", with: currency)
-        return URL(string: url)!
-    }
-    
-    private func historicalExchangeRateURL(crypto: String, currency: String) -> URL {
-        let currentTime = unixTime()
-        var url = "https://min-api.cryptocompare.com/data/histohour?fsym={CRYPTO}&tsym={REAL}&limit={LIMIT}&toTs={TIME}"
-        url = url.replacingOccurrences(of: "{CRYPTO}", with: crypto)
-        url = url.replacingOccurrences(of: "{REAL}", with: currency)
-        url = url.replacingOccurrences(of: "{LIMIT}", with: NUM_DATAPOINTS)
-        url = url.replacingOccurrences(of: "{TIME}", with: currentTime)
-        return URL(string: url)!
-    }
-    
-    private func infoViewURL(crypto: String, currency: String) -> URL {
-        var url = "https://api.coinmarketcap.com/v1/ticker/{CRYPTO}/?convert={REAL}"
-        url = url.replacingOccurrences(of: "{CRYPTO}", with: self.cryptoDict[crypto]!)
-        url = url.replacingOccurrences(of: "{REAL}", with: currency)
-        return URL(string: url)!
     }
     
     private func parseConversionRate(responseDict: NSDictionary??, currency: String, country: String) -> String {
