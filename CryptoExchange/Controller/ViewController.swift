@@ -14,9 +14,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var conversionText: UILabel!
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var cryptoPicker: UIPickerView!
-
     
     static let pickerValues = [["BCH","BTC","BTG","DOGE","ETH", "LTC", "XRP"], ["CAD", "EUR","GBP", "JPY", "USD"]]
+    private let coinExchange = CoinExchangeRequest()
     private let graphView = CryptoGraphView()
     private let apiClient = ApiClient()
     private let defaultMessage = "Select Below"
@@ -39,9 +39,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func enableForceTouch() {
-        if (traitCollection.forceTouchCapability == UIForceTouchCapability.available) {
+        if (isForceTouchAvailable()) {
             registerForPreviewing(with: self, sourceView: view)
         }
+    }
+    
+    private func isForceTouchAvailable() -> Bool {
+        return traitCollection.forceTouchCapability == UIForceTouchCapability.available
     }
     
     override func didReceiveMemoryWarning() {
@@ -66,7 +70,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     private func getExchangeRateGraph(coin: String, realCurrency: String) {
-        if (prevSelectedCrypto != getSelectedCrypto() || prevSelectedReal != getSelectedReal()) {
+        if (hasSelectionChanged()) {
             let coinGraphRequest = CoinGraphRequest()
             prevSelectedCrypto = coin
             prevSelectedReal = realCurrency
@@ -74,8 +78,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
     }
     
+    private func hasSelectionChanged() -> Bool {
+        return prevSelectedCrypto != getSelectedCrypto() || prevSelectedReal != getSelectedReal()
+    }
+    
     func updateConversionRate(crypto: String, realCurrency: String) {
-        let coinExchange = CoinExchangeRequest()
         let exchangeRate = coinExchange.fetchFromCache(crypto: crypto, country: realCurrency)
         if (exchangeRate != coinExchange.CACHE_MISS) {
             self.setExchangeRateLabel(rate: exchangeRate)
@@ -87,16 +94,15 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func updateConversionRateCheckCache(crypto: String, realCurrency: String) {
-        let coinExchangeRequest = CoinExchangeRequest()
-        let cacheFetch = coinExchangeRequest.fetchFromCache(crypto: crypto, country: realCurrency)
-        if (cacheFetch != coinExchangeRequest.CACHE_MISS) {
+        let cacheFetch = coinExchange.fetchFromCache(crypto: crypto, country: realCurrency)
+        if (cacheFetch != coinExchange.CACHE_MISS) {
             self.setExchangeRateLabel(rate: cacheFetch)
         } else {
             updateConversionRate(crypto: crypto, realCurrency: realCurrency)
         }
     }
     
-    fileprivate func setExchangeRateLabel(rate: String) {
+    private func setExchangeRateLabel(rate: String) {
         DispatchQueue.main.async {
             self.conversionText.text = rate
         }
